@@ -43,6 +43,21 @@ WordPress, Supabase, Firebase, Express, separate backend, custom CMS, public use
 - Live content via `sanityFetch` / `SanityLive` from `src/sanity/lib/live.ts`
 - Import icons from root: `import { CogIcon } from '@sanity/icons'`
 
+## Subagent Orchestration
+
+- Use `architect` for architecture, dependency, scope, and major technical decisions.
+- Use `sanity-cms` for schemas, Studio, GROQ, TypeGen, CMS data modeling, and Sanity integrations.
+- Use `frontend` for public UI, design system, responsive implementation, accessibility, and page/component work.
+- Use `qa-security` after meaningful implementation milestones and before production release.
+- Do not delegate trivial single-file edits simply because an agent exists.
+- Do not have multiple agents independently solve the same implementation task.
+- Use agents when specialization or isolated review materially improves the result.
+- The parent Claude session coordinates changes and resolves conflicts.
+- Frontend must not silently modify CMS architecture.
+- Sanity CMS must not redesign public UI.
+- QA/Security is primarily an auditor — should not silently rewrite implementation.
+- Architecture review is required before adding a new major dependency, backend, database, authentication system, or Phase 2 feature.
+
 ## Docs
 
 - `docs/PROJECT-BRIEF.md` — scope, audience, phases
