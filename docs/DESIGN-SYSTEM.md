@@ -4,9 +4,11 @@ Design tokens and UI conventions for the San Roque de Sampaloc Parish website.
 
 ## Typography
 
-- Headings: Playfair Display (serif, elegant, timeless)
+- Headings: EB Garamond (classical serif, ecclesiastical, editorial)
 - Body: Inter (sans-serif, readable, clean)
-- Loaded via `next/font/google` with CSS variables `--font-playfair` and `--font-inter`
+- Loaded via `next/font/google` with CSS variables `--font-eb-garamond` and `--font-inter`
+- Headings use `font-semibold` for refined weight
+- Small labels use uppercase tracking for liturgical/institutional tone
 
 ## Colors
 
@@ -14,54 +16,68 @@ Design tokens and UI conventions for the San Roque de Sampaloc Parish website.
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `ivory` | `#FDF8F0` | Page background |
-| `ivory-warm` | `#F5F0E8` | Section backgrounds, subtle surfaces |
-| `burgundy` | `#722F37` | Primary brand, buttons, headings accent |
-| `burgundy-light` | `#8B3A42` | Hover states |
-| `burgundy-dark` | `#5C2730` | Active states, dark accents |
-| `gold` | `#C9A84C` | Accent, decorative elements |
-| `gold-light` | `#D4B55E` | Gold hover states |
-| `gold-dark` | `#A8893D` | Gold active states |
+| `ivory` | `#FAF6EE` | Page background (parchment) |
+| `ivory-warm` | `#F0EAD6` | Section backgrounds, cream surfaces |
+| `parchment` | `#F5EFE0` | Icon backgrounds, decorative surfaces |
+| `burgundy` | `#6B1D2A` | Primary brand, buttons, headings accent |
+| `burgundy-light` | `#7E2535` | Hover states |
+| `burgundy-dark` | `#531722` | Hero, prayer section, deep accents |
+| `gold` | `#B8943E` | Accent, decorative rules, dividers |
+| `gold-light` | `#C9A84C` | Gold hover states, eyebrow text on dark |
+| `gold-dark` | `#9A7B33` | Gold active states, eyebrow text on light |
 
 ### Neutral Palette
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `charcoal` | `#2D2D2D` | Primary text |
-| `charcoal-light` | `#5A5A5A` | Secondary text |
-| `charcoal-muted` | `#6B6B6B` | Muted text, captions (WCAG AA compliant on ivory) |
-| `border` | `#E8E0D4` | Card/section borders |
-| `border-light` | `#F0EBE3` | Subtle borders |
+| `charcoal` | `#2A2523` | Primary text (warm dark brown-black) |
+| `charcoal-light` | `#5A524A` | Secondary text (warm medium) |
+| `charcoal-muted` | `#6B6360` | Muted text, captions (WCAG AA: 5.42:1 on ivory) |
+| `border` | `#DDD5C8` | Card/section borders |
+| `border-light` | `#EAE4D9` | Subtle borders |
 
 ## Layout
 
 - Mobile-first using Tailwind CSS v4
 - Custom `container-parish` utility: max-width 80rem, responsive padding
 - Breakpoints: Tailwind defaults (sm 640px, md 768px, lg 1024px, xl 1280px)
-- Section vertical padding: `py-16 md:py-24`
+- Section vertical padding varies by spacing prop: compact, default, loose
+- Sharp corners (no rounded-xl) for editorial feel; minimal rounded elements
+
+## Visual Language
+
+- Thin gold rules as dividers and decorative accents
+- Subtle cross-pattern texture on dark sections (SVG data URI at low opacity)
+- Arch-shaped framing for image/photo areas
+- Small liturgical-style eyebrow labels (uppercase, tracking-wider, gold)
+- Section rhythm varies: split layouts, full-width colored sections, editorial grids
+- No SaaS-style gradients or glossy effects
 
 ## Accessibility
 
 - Target: WCAG 2.1 AA
 - Semantic HTML
 - Keyboard navigation
-- Sufficient color contrast
+- Sufficient color contrast (all text tokens verified)
 - Alt text on all images (enforced in CMS schema)
 - Visible focus states with `focus-visible:outline-2`
 - Reduced motion: `prefers-reduced-motion: reduce` globally disables transitions, animations, and scroll-behavior
+- Skip-to-content link as first focusable element
+- Mobile nav focus trap with focus restoration
 
 ## Components
 
 - `Container` — centered content wrapper
-- `Section` — vertical rhythm section with background variants
-- `SectionHeading` — title, subtitle, gold underline accent
-- `ButtonLink` — primary, secondary, outline, gold variants
+- `Section` — vertical rhythm section with background variants (default, warm, burgundy, white)
+- `SectionHeading` — title, subtitle, eyebrow, gold underline; supports centered and left-aligned
+- `ButtonLink` — primary, secondary, outline, gold, outline-light variants
 - `ScheduleDisplay` — renders CMS schedule entries
 - `PortableTextRenderer` — Portable Text rendering with parish styling
-- `AnnouncementCard` — announcement preview card
-- `EventCard` — event with date badge
+- `AnnouncementCard` — editorial announcement card
+- `EventCard` — event with burgundy date block
 - `HomilyCard` — homily preview
-- `MinistryCard` — ministry summary
-- `Header` — sticky top nav with logo and desktop links
-- `MobileNav` — slide-out mobile menu with overlay
-- `Footer` — four-column footer with CMS data
+- `MinistryCard` — ministry summary with icon
+- `Header` — sticky top nav with gold top accent, cross motif, Server Component
+- `MobileMenuTrigger` — Client Component for mobile menu state
+- `MobileNav` — slide-out mobile menu with focus trap
+- `Footer` — four-column institutional footer with CMS data

@@ -25,35 +25,38 @@ const categoryLabels: Record<string, string> = {
 
 function FeaturedCard({ announcement }: { announcement: Announcement }) {
   return (
-    <article className="bg-white rounded-xl border border-border p-8 md:p-10 hover:shadow-lg transition-shadow">
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-xs font-semibold uppercase tracking-wider text-white bg-burgundy px-3 py-1 rounded-full">
-          {categoryLabels[announcement.category] ?? announcement.category}
-        </span>
-        <time
-          dateTime={announcement.publishedAt}
-          className="text-sm text-charcoal-muted"
-        >
-          {parseDateString(announcement.publishedAt).toLocaleDateString("en-PH", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
-        </time>
+    <article className="bg-white border border-border overflow-hidden md:flex group">
+      <div className="md:w-2 bg-burgundy flex-shrink-0" aria-hidden="true" />
+      <div className="p-8 md:p-10 flex-1">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white bg-burgundy px-3 py-1">
+            {categoryLabels[announcement.category] ?? announcement.category}
+          </span>
+          <time
+            dateTime={announcement.publishedAt}
+            className="text-[11px] text-charcoal-muted tracking-wide"
+          >
+            {parseDateString(announcement.publishedAt).toLocaleDateString("en-PH", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}
+          </time>
+        </div>
+        <h3 className="text-2xl md:text-3xl font-semibold text-charcoal mb-3 leading-snug">
+          <Link
+            href={`/announcements/${announcement.slug}`}
+            className="hover:text-burgundy transition-colors"
+          >
+            {announcement.title}
+          </Link>
+        </h3>
+        {announcement.excerpt && (
+          <p className="text-charcoal-light text-base leading-relaxed line-clamp-4 max-w-2xl">
+            {announcement.excerpt}
+          </p>
+        )}
       </div>
-      <h3 className="text-2xl md:text-3xl font-bold text-charcoal mb-3">
-        <Link
-          href={`/announcements/${announcement.slug}`}
-          className="hover:text-burgundy transition-colors"
-        >
-          {announcement.title}
-        </Link>
-      </h3>
-      {announcement.excerpt && (
-        <p className="text-charcoal-light text-base leading-relaxed line-clamp-4 max-w-2xl">
-          {announcement.excerpt}
-        </p>
-      )}
     </article>
   );
 }
@@ -76,8 +79,8 @@ export function FeaturedAnnouncementSection({
     <Section bg="default">
       <Container>
         <SectionHeading
+          eyebrow="Parish News"
           title="Announcements"
-          subtitle="Stay updated with the latest parish news"
         />
         <div className="max-w-5xl mx-auto space-y-6">
           <FeaturedCard announcement={featured} />

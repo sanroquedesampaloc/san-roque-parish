@@ -9,53 +9,74 @@ export function HeroSection({
   } | null;
 }) {
   return (
-    <section className="relative bg-burgundy text-white overflow-hidden">
+    <section className="relative bg-burgundy-dark text-white overflow-hidden">
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(201,168,76,0.15)_0%,_transparent_50%)]"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(92,39,48,0.8)_0%,_transparent_60%)]"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23ffffff' stroke-width='0.5' fill='none'/%3E%3C/svg%3E\")",
-          backgroundSize: "60px 60px",
+            "url(\"data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0v80M0 40h80' stroke='%23ffffff' stroke-width='0.3' fill='none'/%3E%3C/svg%3E\")",
+          backgroundSize: "80px 80px",
         }}
         aria-hidden="true"
       />
-      <div className="container-parish relative py-24 md:py-36 lg:py-44">
-        <div className="max-w-3xl">
-          <p className="text-gold font-semibold tracking-[0.2em] uppercase text-sm mb-5">
-            Welcome to
-          </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] mb-6">
-            {settings?.parishName ?? "San Roque de Sampaloc Parish"}
-          </h1>
-          {settings?.shortDescription && (
-            <p className="text-lg md:text-xl lg:text-2xl text-white/80 leading-relaxed mb-10 max-w-2xl">
-              {settings.shortDescription}
+
+      <div className="container-parish relative">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center py-20 md:py-28 lg:py-36">
+          <div className="lg:col-span-3">
+            <p className="text-gold font-medium tracking-[0.25em] uppercase text-xs mb-6">
+              Welcome to
             </p>
-          )}
-          <div className="flex flex-wrap gap-4">
-            <ButtonLink href="#mass-schedule" variant="gold">
-              Mass Schedule
-            </ButtonLink>
-            <ButtonLink
-              href="/announcements"
-              variant="outline"
-              className="border-white/40 text-white hover:bg-white/10 hover:text-white"
-            >
-              Latest Announcements
-            </ButtonLink>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] mb-6">
+              {settings?.parishName ?? "San Roque de Sampaloc Parish"}
+            </h1>
+            {settings?.shortDescription ? (
+              <p className="text-lg md:text-xl text-white/75 leading-relaxed mb-10 max-w-xl">
+                {settings.shortDescription}
+              </p>
+            ) : (
+              <p className="text-lg md:text-xl text-white/75 leading-relaxed mb-10 max-w-xl">
+                A Catholic community of faith, worship, and service in the heart of Sampaloc, Manila.
+              </p>
+            )}
+            <div className="flex flex-wrap gap-4">
+              <ButtonLink href="#mass-schedule" variant="gold">
+                Mass Schedule
+              </ButtonLink>
+              <ButtonLink href="/contact" variant="outline-light">
+                Plan Your Visit
+              </ButtonLink>
+            </div>
+          </div>
+
+          <div className="lg:col-span-2 flex justify-center lg:justify-end" aria-hidden="true">
+            <div className="relative w-64 md:w-72 lg:w-80">
+              <div
+                className="aspect-[3/4] bg-burgundy rounded-t-full border border-white/10 overflow-hidden relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-gold/8 to-transparent" />
+                <div className="absolute inset-4 rounded-t-full border border-gold/15" />
+                <div className="absolute inset-8 rounded-t-full border border-gold/8" />
+
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <svg className="w-20 h-20 text-gold/20" viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth="0.75">
+                    <path d="M40 5v70M15 30h50M20 20h40M25 45h30" strokeLinecap="round" />
+                    <circle cx="40" cy="30" r="8" />
+                  </svg>
+                </div>
+
+                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-burgundy-dark/60 to-transparent" />
+              </div>
+
+              <div className="mt-3 text-center">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Parish Photo</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
       <div
-        className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-ivory to-transparent"
+        className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-ivory to-transparent"
         aria-hidden="true"
       />
     </section>

@@ -1,30 +1,42 @@
-import { Section } from "@/components/ui/Section";
-import { Container } from "@/components/ui/Container";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 
 export function PrayerRequestSection() {
   return (
-    <Section bg="burgundy" spacing="loose">
-      <Container>
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
-            <svg className="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-            </svg>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-5">
+    <section className="relative bg-burgundy-dark text-white overflow-hidden py-20 md:py-28">
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23ffffff' stroke-width='0.3' fill='none'/%3E%3C/svg%3E\")",
+          backgroundSize: "60px 60px",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="container-parish relative">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="w-px h-10 bg-gold/40 mx-auto mb-8" aria-hidden="true" />
+
+          <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold-light mb-6">
+            We Are Here for You
+          </p>
+
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-6 leading-tight">
             Need Prayers?
           </h2>
-          <p className="text-lg md:text-xl text-white/85 mb-8 leading-relaxed max-w-2xl mx-auto">
+
+          <p className="text-base md:text-lg text-white/70 mb-10 leading-relaxed max-w-xl mx-auto">
             Our parish community is here for you. Reach out and let us lift your
             intentions in prayer.
           </p>
-          <div className="h-px w-20 bg-gold/50 mx-auto mb-8" aria-hidden="true" />
-          <p className="text-white/60 text-sm">
-            Prayer request form coming soon. In the meantime, please visit the
-            parish office or contact us directly.
-          </p>
+
+          <ButtonLink href="/prayer-request" variant="gold">
+            Send a Prayer Request
+          </ButtonLink>
+
+          <div className="w-px h-10 bg-gold/40 mx-auto mt-10" aria-hidden="true" />
         </div>
-      </Container>
-    </Section>
+      </div>
+    </section>
   );
 }

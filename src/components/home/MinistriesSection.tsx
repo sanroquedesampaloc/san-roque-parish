@@ -19,11 +19,11 @@ export function MinistriesSection({
   const display = ministries.slice(0, 6);
 
   return (
-    <Section bg="warm">
+    <Section bg="white">
       <Container>
         <SectionHeading
+          eyebrow="Serve the Lord"
           title="Our Ministries"
-          subtitle="Serve the Lord through our parish ministries"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {display.map((ministry) => (

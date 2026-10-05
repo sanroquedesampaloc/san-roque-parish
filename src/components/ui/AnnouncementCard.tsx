@@ -24,14 +24,15 @@ export function AnnouncementCard({
   announcement: Announcement;
 }) {
   return (
-    <article className="bg-white rounded-xl border border-border p-6 hover:shadow-lg transition-all hover:-translate-y-0.5">
+    <article className="bg-white border border-border p-6 hover:shadow-md transition-shadow group">
       <div className="flex items-center gap-3 mb-3">
-        <span className="text-xs font-semibold uppercase tracking-wider text-burgundy bg-burgundy/10 px-2.5 py-1 rounded-full">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-burgundy">
           {categoryLabels[announcement.category] ?? announcement.category}
         </span>
+        <span className="text-charcoal-muted text-[11px]" aria-hidden="true">&middot;</span>
         <time
           dateTime={announcement.publishedAt}
-          className="text-sm text-charcoal-muted"
+          className="text-[11px] text-charcoal-muted tracking-wide"
         >
           {parseDateString(announcement.publishedAt).toLocaleDateString("en-PH", {
             month: "long",
@@ -40,7 +41,7 @@ export function AnnouncementCard({
           })}
         </time>
       </div>
-      <h3 className="text-lg font-bold text-charcoal mb-2">
+      <h3 className="text-lg font-semibold text-charcoal mb-2 leading-snug">
         <Link
           href={`/announcements/${announcement.slug}`}
           className="hover:text-burgundy transition-colors"

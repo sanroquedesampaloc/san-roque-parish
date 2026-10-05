@@ -22,11 +22,11 @@ export function UpcomingEventsSection({
   const display = events.slice(0, 4);
 
   return (
-    <Section bg="warm">
+    <Section bg="white">
       <Container>
         <SectionHeading
+          eyebrow="Parish Life"
           title="Upcoming Events"
-          subtitle="Join our parish community activities"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {display.map((event) => (

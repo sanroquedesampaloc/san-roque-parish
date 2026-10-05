@@ -79,30 +79,31 @@ export function MobileNav({
 
   return (
     <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-      <div className="fixed inset-0 bg-black/40" onClick={onClose} aria-hidden="true" />
-      <div ref={panelRef} className="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-xl flex flex-col">
-        <div className="flex items-center justify-between px-4 h-16 border-b border-border">
-          <span className="text-lg font-bold font-serif text-burgundy">Menu</span>
+      <div className="fixed inset-0 bg-charcoal/50" onClick={onClose} aria-hidden="true" />
+      <div ref={panelRef} className="fixed inset-y-0 right-0 w-full max-w-xs bg-ivory shadow-2xl flex flex-col">
+        <div className="h-0.5 bg-gold" aria-hidden="true" />
+        <div className="flex items-center justify-between px-5 h-16 border-b border-border">
+          <span className="text-base font-semibold font-serif text-burgundy">Menu</span>
           <button
             ref={closeRef}
             type="button"
             onClick={onClose}
-            className="p-2 -mr-2 text-charcoal hover:text-burgundy transition-colors"
+            className="p-2 -mr-2 text-charcoal-light hover:text-burgundy transition-colors"
             aria-label="Close menu"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <nav className="flex-1 overflow-y-auto py-4" aria-label="Mobile navigation">
-          <ul className="space-y-1 px-3">
+        <nav className="flex-1 overflow-y-auto py-6" aria-label="Mobile navigation">
+          <ul className="space-y-0.5 px-4">
             {links.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   onClick={onClose}
-                  className="block px-4 py-3 text-base font-medium text-charcoal hover:text-burgundy hover:bg-burgundy/5 rounded-md transition-colors"
+                  className="block px-4 py-3 text-sm font-medium uppercase tracking-wider text-charcoal hover:text-burgundy hover:bg-burgundy/5 rounded transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -110,6 +111,9 @@ export function MobileNav({
             ))}
           </ul>
         </nav>
+        <div className="px-5 py-4 border-t border-border">
+          <p className="text-xs text-charcoal-muted tracking-wide uppercase">San Roque de Sampaloc Parish</p>
+        </div>
       </div>
     </div>
   );

@@ -9,10 +9,10 @@ type Ministry = {
 
 export function MinistryCard({ ministry }: { ministry: Ministry }) {
   return (
-    <article className="group bg-white rounded-xl border border-border p-6 md:p-8 hover:shadow-lg transition-all text-center hover:-translate-y-0.5">
-      <div className="w-16 h-16 mx-auto mb-5 bg-burgundy/10 rounded-full flex items-center justify-center group-hover:bg-burgundy/15 transition-colors">
+    <article className="group bg-white border border-border p-6 md:p-8 text-center hover:shadow-md transition-shadow hover:border-burgundy/20">
+      <div className="w-14 h-14 mx-auto mb-5 bg-parchment rounded-full flex items-center justify-center">
         <svg
-          className="w-8 h-8 text-burgundy"
+          className="w-6 h-6 text-burgundy"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -26,7 +26,7 @@ export function MinistryCard({ ministry }: { ministry: Ministry }) {
           />
         </svg>
       </div>
-      <h3 className="text-lg font-bold text-charcoal mb-2 group-hover:text-burgundy transition-colors">
+      <h3 className="text-sm font-semibold uppercase tracking-wider text-charcoal mb-2 group-hover:text-burgundy transition-colors">
         <Link
           href={`/ministries/${ministry.slug}`}
           className="hover:text-burgundy transition-colors"
@@ -35,7 +35,7 @@ export function MinistryCard({ ministry }: { ministry: Ministry }) {
         </Link>
       </h3>
       {ministry.coordinator && (
-        <p className="text-sm text-charcoal-muted">{ministry.coordinator}</p>
+        <p className="text-xs text-charcoal-muted">{ministry.coordinator}</p>
       )}
     </article>
   );

@@ -13,16 +13,16 @@ type Homily = {
 
 export function HomilyCard({ homily }: { homily: Homily }) {
   return (
-    <article className="bg-white rounded-lg border border-border p-6 hover:shadow-md transition-shadow">
+    <article className="bg-white border border-border p-6 hover:shadow-md transition-shadow group">
       <div className="flex items-center gap-3 mb-3">
         {homily.liturgicalOccasion && (
-          <span className="text-xs font-semibold uppercase tracking-wider text-burgundy bg-gold/15 px-2 py-1 rounded">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-burgundy bg-gold/15 px-2 py-1">
             {homily.liturgicalOccasion}
           </span>
         )}
         <time
           dateTime={homily.date}
-          className="text-sm text-charcoal-muted"
+          className="text-[11px] text-charcoal-muted tracking-wide"
         >
           {parseDateString(homily.date).toLocaleDateString("en-PH", {
             month: "long",
@@ -31,7 +31,7 @@ export function HomilyCard({ homily }: { homily: Homily }) {
           })}
         </time>
       </div>
-      <h3 className="text-xl font-bold text-charcoal mb-2">
+      <h3 className="text-lg font-semibold text-charcoal mb-2 leading-snug">
         <Link
           href={`/homilies/${homily.slug}`}
           className="hover:text-burgundy transition-colors"

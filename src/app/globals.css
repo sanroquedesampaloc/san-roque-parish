@@ -1,23 +1,25 @@
 @import "tailwindcss";
 
 :root {
-  --color-ivory: #FDF8F0;
-  --color-ivory-warm: #F5F0E8;
+  --color-ivory: #FAF6EE;
+  --color-ivory-warm: #F0EAD6;
 
-  --color-burgundy: #722F37;
-  --color-burgundy-light: #8B3A42;
-  --color-burgundy-dark: #5C2730;
+  --color-burgundy: #6B1D2A;
+  --color-burgundy-light: #7E2535;
+  --color-burgundy-dark: #531722;
 
-  --color-gold: #C9A84C;
-  --color-gold-light: #D4B55E;
-  --color-gold-dark: #A8893D;
+  --color-gold: #B8943E;
+  --color-gold-light: #C9A84C;
+  --color-gold-dark: #9A7B33;
 
-  --color-charcoal: #2D2D2D;
-  --color-charcoal-light: #5A5A5A;
-  --color-charcoal-muted: #6B6B6B;
+  --color-charcoal: #2A2523;
+  --color-charcoal-light: #5A524A;
+  --color-charcoal-muted: #6B6360;
 
-  --color-border: #E8E0D4;
-  --color-border-light: #F0EBE3;
+  --color-border: #DDD5C8;
+  --color-border-light: #EAE4D9;
+
+  --color-parchment: #F5EFE0;
 }
 
 @theme inline {
@@ -34,7 +36,8 @@
   --color-charcoal-muted: var(--color-charcoal-muted);
   --color-border: var(--color-border);
   --color-border-light: var(--color-border-light);
-  --font-serif: var(--font-playfair);
+  --color-parchment: var(--color-parchment);
+  --font-serif: var(--font-eb-garamond);
   --font-sans: var(--font-inter);
 }
 
