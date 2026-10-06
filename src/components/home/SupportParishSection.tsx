@@ -27,7 +27,7 @@ export function SupportParishSection({
               <p className="text-charcoal-light leading-relaxed mb-6">
                 Your generosity sustains our community of faith, enabling us to serve and worship together.
               </p>
-              <ButtonLink href="/contact" variant="primary">
+              <ButtonLink href="/give" variant="primary">
                 Support the Parish
               </ButtonLink>
             </div>
