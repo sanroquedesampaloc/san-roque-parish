@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AnnouncementCard } from "@/components/ui/AnnouncementCard";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { parseDateString } from "@/lib/dates";
+import { categoryLabels } from "@/lib/constants";
 
 type Announcement = {
   _id: string;
@@ -13,14 +14,6 @@ type Announcement = {
   excerpt: string | null;
   category: string;
   publishedAt: string;
-};
-
-const categoryLabels: Record<string, string> = {
-  general: "General",
-  liturgical: "Liturgical",
-  community: "Community",
-  youth: "Youth",
-  outreach: "Outreach",
 };
 
 function FeaturedCard({ announcement }: { announcement: Announcement }) {
@@ -45,7 +38,7 @@ function FeaturedCard({ announcement }: { announcement: Announcement }) {
         </div>
         <h3 className="text-2xl md:text-3xl font-semibold text-charcoal mb-3 leading-snug">
           <Link
-            href={`/announcements/${announcement.slug}`}
+            href={`/news/${announcement.slug}`}
             className="hover:text-burgundy transition-colors"
           >
             {announcement.title}
@@ -94,8 +87,8 @@ export function FeaturedAnnouncementSection({
         </div>
         {announcements.length > 3 && (
           <div className="text-center mt-10">
-            <ButtonLink href="/announcements" variant="outline">
-              View All Announcements
+            <ButtonLink href="/news" variant="outline">
+              View All News
             </ButtonLink>
           </div>
         )}

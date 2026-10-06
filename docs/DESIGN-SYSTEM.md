@@ -24,7 +24,7 @@ Design tokens and UI conventions for the San Roque de Sampaloc Parish website.
 | `burgundy-dark` | `#531722` | Hero, prayer section, deep accents |
 | `gold` | `#B8943E` | Accent, decorative rules, dividers |
 | `gold-light` | `#C9A84C` | Gold hover states, eyebrow text on dark |
-| `gold-dark` | `#9A7B33` | Gold active states, eyebrow text on light |
+| `gold-dark` | `#7A6529` | Gold active states, eyebrow text on light (WCAG AA compliant) |
 
 ### Neutral Palette
 

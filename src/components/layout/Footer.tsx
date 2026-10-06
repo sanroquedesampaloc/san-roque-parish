@@ -4,9 +4,9 @@ import { PARISH_SETTINGS_QUERY } from "@/sanity/lib/queries/parish";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 
 const quickLinks = [
-  { href: "/sacraments", label: "Sacraments" },
+  { href: "/mass-sacraments", label: "Mass & Sacraments" },
   { href: "/ministries", label: "Ministries" },
-  { href: "/announcements", label: "Announcements" },
+  { href: "/news", label: "News" },
   { href: "/events", label: "Events" },
   { href: "/homilies", label: "Homilies" },
   { href: "/contact", label: "Contact" },

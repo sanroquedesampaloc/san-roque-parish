@@ -4,9 +4,9 @@ import { MobileMenuTrigger } from "./MobileMenuTrigger";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/sacraments", label: "Sacraments" },
+  { href: "/mass-sacraments", label: "Sacraments" },
   { href: "/ministries", label: "Ministries" },
-  { href: "/announcements", label: "News" },
+  { href: "/news", label: "News" },
   { href: "/events", label: "Events" },
   { href: "/homilies", label: "Homilies" },
   { href: "/contact", label: "Contact" },

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { parseDateString } from "@/lib/dates";
+import { categoryLabels } from "@/lib/constants";
 
 type Announcement = {
   _id: string;
@@ -8,14 +9,6 @@ type Announcement = {
   excerpt: string | null;
   category: string;
   publishedAt: string;
-};
-
-const categoryLabels: Record<string, string> = {
-  general: "General",
-  liturgical: "Liturgical",
-  community: "Community",
-  youth: "Youth",
-  outreach: "Outreach",
 };
 
 export function AnnouncementCard({
@@ -43,7 +36,7 @@ export function AnnouncementCard({
       </div>
       <h3 className="text-lg font-semibold text-charcoal mb-2 leading-snug">
         <Link
-          href={`/announcements/${announcement.slug}`}
+          href={`/news/${announcement.slug}`}
           className="hover:text-burgundy transition-colors"
         >
           {announcement.title}

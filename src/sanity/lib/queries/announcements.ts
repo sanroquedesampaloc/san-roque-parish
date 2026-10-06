@@ -28,7 +28,7 @@ export const ANNOUNCEMENTS_LIST_QUERY = defineQuery(`
 `)
 
 export const ANNOUNCEMENT_BY_SLUG_QUERY = defineQuery(`
-  *[_type == "announcement" && slug.current == $slug][0] {
+  *[_type == "announcement" && slug.current == $slug && status == "active"][0] {
     _id,
     title,
     "slug": slug.current,

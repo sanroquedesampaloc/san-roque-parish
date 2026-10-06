@@ -49,7 +49,7 @@ export function SacramentsSection({
           {sacraments.map((sac) => (
             <Link
               key={sac._id}
-              href={`/sacraments/${sac.slug}`}
+              href={`/mass-sacraments#${sac.slug}`}
               className="group bg-white border border-border p-6 text-center hover:shadow-md transition-shadow hover:border-burgundy/20"
             >
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-parchment flex items-center justify-center">
@@ -71,7 +71,7 @@ export function SacramentsSection({
           ))}
         </div>
         <div className="text-center mt-12">
-          <ButtonLink href="/sacraments" variant="outline">
+          <ButtonLink href="/mass-sacraments" variant="outline">
             Explore Sacraments
           </ButtonLink>
         </div>

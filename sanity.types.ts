@@ -435,7 +435,7 @@ export type ANNOUNCEMENTS_LIST_QUERY_RESULT = Array<{
 
 // Source: src/sanity/lib/queries/announcements.ts
 // Variable: ANNOUNCEMENT_BY_SLUG_QUERY
-// Query: *[_type == "announcement" && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    excerpt,    featuredImage,    body,    category,    publishedAt,    featured,    status  }
+// Query: *[_type == "announcement" && slug.current == $slug && status == "active"][0] {    _id,    title,    "slug": slug.current,    excerpt,    featuredImage,    body,    category,    publishedAt,    featured,    status  }
 export type ANNOUNCEMENT_BY_SLUG_QUERY_RESULT = {
   _id: string;
   title: string;
@@ -482,7 +482,7 @@ export type UPCOMING_EVENTS_QUERY_RESULT = Array<{
 
 // Source: src/sanity/lib/queries/events.ts
 // Variable: EVENTS_LIST_QUERY
-// Query: *[_type == "event"] | order(startDate desc) {    _id,    title,    "slug": slug.current,    poster,    startDate,    endDate,    startTime,    endTime,    location,    featured,    status  }
+// Query: *[_type == "event" && status != "cancelled"] | order(startDate desc) {    _id,    title,    "slug": slug.current,    poster,    startDate,    endDate,    startTime,    endTime,    location,    featured,    status  }
 export type EVENTS_LIST_QUERY_RESULT = Array<{
   _id: string;
   title: string;
@@ -506,7 +506,7 @@ export type EVENTS_LIST_QUERY_RESULT = Array<{
 
 // Source: src/sanity/lib/queries/events.ts
 // Variable: EVENT_BY_SLUG_QUERY
-// Query: *[_type == "event" && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    poster,    description,    startDate,    endDate,    startTime,    endTime,    location,    registrationUrl,    featured,    status  }
+// Query: *[_type == "event" && slug.current == $slug && status != "cancelled"][0] {    _id,    title,    "slug": slug.current,    poster,    description,    startDate,    endDate,    startTime,    endTime,    location,    registrationUrl,    featured,    status  }
 export type EVENT_BY_SLUG_QUERY_RESULT = {
   _id: string;
   title: string;
@@ -722,10 +722,10 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '\n  *[_type == "announcement" && featured == true && status == "active"]\n    | order(publishedAt desc) [0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    category,\n    publishedAt\n  }\n': FEATURED_ANNOUNCEMENT_QUERY_RESULT;
     '\n  *[_type == "announcement" && status == "active"]\n    | order(publishedAt desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    category,\n    publishedAt,\n    featured\n  }\n': ANNOUNCEMENTS_LIST_QUERY_RESULT;
-    '\n  *[_type == "announcement" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    body,\n    category,\n    publishedAt,\n    featured,\n    status\n  }\n': ANNOUNCEMENT_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "announcement" && slug.current == $slug && status == "active"][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    body,\n    category,\n    publishedAt,\n    featured,\n    status\n  }\n': ANNOUNCEMENT_BY_SLUG_QUERY_RESULT;
     '\n  *[_type == "event" && status in ["upcoming", "ongoing"]]\n    | order(startDate asc) {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    featured,\n    status\n  }\n': UPCOMING_EVENTS_QUERY_RESULT;
-    '\n  *[_type == "event"] | order(startDate desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    featured,\n    status\n  }\n': EVENTS_LIST_QUERY_RESULT;
-    '\n  *[_type == "event" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    description,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    registrationUrl,\n    featured,\n    status\n  }\n': EVENT_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "event" && status != "cancelled"] | order(startDate desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    featured,\n    status\n  }\n': EVENTS_LIST_QUERY_RESULT;
+    '\n  *[_type == "event" && slug.current == $slug && status != "cancelled"][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    description,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    registrationUrl,\n    featured,\n    status\n  }\n': EVENT_BY_SLUG_QUERY_RESULT;
     '\n  *[_type == "homily"] | order(date desc) [0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': LATEST_HOMILY_QUERY_RESULT;
     '\n  *[_type == "homily"] | order(date desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': HOMILIES_LIST_QUERY_RESULT;
     '\n  *[_type == "homily" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    videoUrl,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': HOMILY_BY_SLUG_QUERY_RESULT;

@@ -18,7 +18,7 @@ export const UPCOMING_EVENTS_QUERY = defineQuery(`
 `)
 
 export const EVENTS_LIST_QUERY = defineQuery(`
-  *[_type == "event"] | order(startDate desc) {
+  *[_type == "event" && status != "cancelled"] | order(startDate desc) {
     _id,
     title,
     "slug": slug.current,
@@ -34,7 +34,7 @@ export const EVENTS_LIST_QUERY = defineQuery(`
 `)
 
 export const EVENT_BY_SLUG_QUERY = defineQuery(`
-  *[_type == "event" && slug.current == $slug][0] {
+  *[_type == "event" && slug.current == $slug && status != "cancelled"][0] {
     _id,
     title,
     "slug": slug.current,
