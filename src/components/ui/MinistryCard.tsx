@@ -28,7 +28,7 @@ export function MinistryCard({ ministry }: { ministry: Ministry }) {
       </div>
       <h3 className="text-sm font-semibold uppercase tracking-wider text-charcoal mb-2 group-hover:text-burgundy transition-colors">
         <Link
-          href={`/ministries/${ministry.slug}`}
+          href={`/ministries#${ministry.slug}`}
           className="hover:text-burgundy transition-colors"
         >
           {ministry.name}
