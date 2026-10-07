@@ -54,10 +54,10 @@ export default async function NewsDetailPage({ params }: Props) {
         backLink={{ href: "/news", label: "Back to News" }}
       />
 
-      <Section bg="default">
+      <Section bg="default" spacing="compact">
         <Container>
           <article className="max-w-3xl mx-auto">
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-6">
               <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white bg-burgundy px-3 py-1">
                 {categoryLabels[announcement.category] ?? announcement.category}
               </span>

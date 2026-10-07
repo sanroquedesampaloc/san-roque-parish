@@ -11,11 +11,22 @@ type Event = {
   location: string | null;
 };
 
-export function EventCard({ event }: { event: Event }) {
+export function EventCard({
+  event,
+  interactive = true,
+}: {
+  event: Event;
+  /** Set to false for past/non-actionable events to drop the hover-lift affordance. */
+  interactive?: boolean;
+}) {
   const startDate = parseDateString(event.startDate);
 
   return (
-    <article className="bg-white border border-border overflow-hidden card-premium group">
+    <article
+      className={`bg-white border border-border overflow-hidden group ${
+        interactive ? "card-premium" : ""
+      }`}
+    >
       <div className="flex">
         <div className="flex-shrink-0 w-20 md:w-24 bg-burgundy-dark text-white flex flex-col items-center justify-center p-4">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-light">

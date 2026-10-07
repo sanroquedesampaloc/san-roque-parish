@@ -3,9 +3,14 @@
 import { useActionState, useState, useRef, useEffect, useCallback } from "react";
 import {
   submitPrayerRequest,
-  prayerRequestInitialState,
+  type PrayerRequestFormState,
 } from "@/lib/actions/prayer-request";
 import { TurnstileWidget, type TurnstileHandle } from "@/components/ui/TurnstileWidget";
+
+const prayerRequestInitialState: PrayerRequestFormState = {
+  status: "idle",
+  message: "",
+};
 
 const inputClasses =
   "w-full bg-white border border-border px-4 py-3 text-charcoal text-sm placeholder:text-charcoal-muted/60 focus:border-burgundy focus:ring-1 focus:ring-burgundy/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy transition-colors";

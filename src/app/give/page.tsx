@@ -8,6 +8,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 export const metadata: Metadata = {
   title: "Support the Parish",
@@ -24,6 +26,7 @@ export default async function GivePage() {
     <>
       <Breadcrumbs items={[{ name: "Support the Parish" }]} />
       <PageHero
+        eyebrow="Stewardship"
         title="Support the Parish"
         subtitle="Your generosity sustains our community of faith and service."
       />
@@ -48,6 +51,8 @@ export default async function GivePage() {
       </Section>
 
       {/* Giving Information from CMS */}
+      <SectionDivider bg="ivory-warm" />
+      <ScrollReveal>
       <Section bg="warm">
         <Container>
           <SectionHeading
@@ -70,8 +75,11 @@ export default async function GivePage() {
           </div>
         </Container>
       </Section>
+      </ScrollReveal>
 
       {/* Other Ways to Support */}
+      <SectionDivider bg="ivory" />
+      <ScrollReveal delay={80}>
       <Section bg="default">
         <Container>
           <SectionHeading
@@ -165,8 +173,10 @@ export default async function GivePage() {
           </div>
         </Container>
       </Section>
+      </ScrollReveal>
 
       {/* Contact CTA */}
+      <SectionDivider bg="ivory-warm" />
       <Section bg="warm" spacing="compact">
         <Container>
           <div className="max-w-2xl mx-auto text-center">

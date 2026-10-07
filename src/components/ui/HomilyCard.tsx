@@ -9,11 +9,12 @@ type Homily = {
   celebrant: string | null;
   description: string | null;
   liturgicalOccasion: string | null;
+  videoUrl?: string | null;
 };
 
 export function HomilyCard({ homily }: { homily: Homily }) {
   return (
-    <article className="bg-white border border-border p-6 hover:shadow-md transition-shadow group">
+    <article className="bg-white border border-border p-6 card-premium group">
       <div className="flex items-center gap-3 mb-3">
         {homily.liturgicalOccasion && (
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-burgundy bg-gold/15 px-2 py-1">
@@ -30,6 +31,14 @@ export function HomilyCard({ homily }: { homily: Homily }) {
             year: "numeric",
           })}
         </time>
+        {homily.videoUrl && (
+          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-charcoal-muted">
+            <svg className="w-3.5 h-3.5 text-burgundy" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+            Video
+          </span>
+        )}
       </div>
       <h3 className="text-lg font-semibold text-charcoal mb-2 leading-snug">
         <Link

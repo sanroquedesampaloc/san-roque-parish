@@ -3,9 +3,11 @@
 import { useActionState, useRef, useEffect } from "react";
 import {
   submitContactForm,
-  contactInitialState,
+  type ContactFormState,
 } from "@/lib/actions/contact";
 import { TurnstileWidget, type TurnstileHandle } from "@/components/ui/TurnstileWidget";
+
+const contactInitialState: ContactFormState = { status: "idle", message: "" };
 
 const inputClasses =
   "w-full bg-white border border-border px-4 py-3 text-charcoal text-sm placeholder:text-charcoal-muted/60 focus:border-burgundy focus:ring-1 focus:ring-burgundy/20 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy transition-colors";

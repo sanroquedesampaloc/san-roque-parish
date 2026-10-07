@@ -17,6 +17,7 @@ export default function PrayerRequestPage() {
     <>
       <Breadcrumbs items={[{ name: "Prayer Request" }]} />
       <PageHero
+        eyebrow="We Are Here for You"
         title="Prayer Request"
         subtitle="Share a prayer intention with the parish community."
       />

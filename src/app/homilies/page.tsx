@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { HomilyCard } from "@/components/ui/HomilyCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { parseDateString } from "@/lib/dates";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
@@ -29,6 +30,7 @@ export default async function HomiliesPage() {
     <>
       <Breadcrumbs items={[{ name: "Homilies" }]} />
       <PageHero
+        eyebrow="Scripture & Reflection"
         title="Homilies"
         subtitle="Reflections on Scripture from our parish celebrations."
       />
@@ -41,9 +43,9 @@ export default async function HomiliesPage() {
               cta={{ href: "/", label: "Return Home" }}
             />
           ) : (
-            <div className="max-w-5xl mx-auto">
+            <ScrollReveal className="max-w-5xl mx-auto">
               {featured && (
-                <article className="bg-white border border-border overflow-hidden mb-12">
+                <article className={`bg-white border border-border overflow-hidden ${rest.length > 0 ? "mb-12" : ""}`}>
                   <div className="md:flex">
                     <div className="md:w-2 bg-burgundy flex-shrink-0" aria-hidden="true" />
                     <div className="p-8 md:p-10 flex-1">
@@ -64,6 +66,14 @@ export default async function HomiliesPage() {
                             year: "numeric",
                           })}
                         </time>
+                        {featured.videoUrl && (
+                          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-charcoal-muted">
+                            <svg className="w-3.5 h-3.5 text-burgundy" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                            Video
+                          </span>
+                        )}
                       </div>
 
                       <h2 className="text-2xl md:text-3xl font-semibold text-charcoal mb-3 leading-snug">
@@ -102,7 +112,7 @@ export default async function HomiliesPage() {
                   ))}
                 </div>
               )}
-            </div>
+            </ScrollReveal>
           )}
         </Container>
       </Section>

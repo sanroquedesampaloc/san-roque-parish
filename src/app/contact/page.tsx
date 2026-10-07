@@ -8,6 +8,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ScheduleDisplay } from "@/components/ui/ScheduleDisplay";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 function isGoogleMapsEmbedUrl(url: string): boolean {
   try {
@@ -38,11 +40,13 @@ export default async function ContactPage() {
     <>
       <Breadcrumbs items={[{ name: "Contact" }]} />
       <PageHero
+        eyebrow="Get in Touch"
         title="Contact Us"
         subtitle="We welcome your questions, prayer intentions, and visits. Reach out to us anytime."
       />
 
       {/* Contact Details & Location */}
+      <ScrollReveal>
       <Section bg="default">
         <Container>
           <SectionHeading
@@ -171,10 +175,13 @@ export default async function ContactPage() {
           </div>
         </Container>
       </Section>
+      </ScrollReveal>
 
       {/* Social & Connect */}
       {hasSocials && (
-        <Section bg="warm">
+        <>
+          <SectionDivider bg="ivory-warm" />
+          <Section bg="warm">
           <Container>
             <SectionHeading
               eyebrow="Stay Connected"
@@ -259,10 +266,14 @@ export default async function ContactPage() {
               )}
             </div>
           </Container>
-        </Section>
+          </Section>
+          <SectionDivider bg="ivory" />
+        </>
       )}
+      {!hasSocials && <SectionDivider bg="ivory-warm" />}
 
       {/* Contact Form */}
+      <ScrollReveal>
       <Section bg={hasSocials ? "default" : "warm"}>
         <Container>
           <SectionHeading
@@ -273,6 +284,7 @@ export default async function ContactPage() {
           <ContactForm />
         </Container>
       </Section>
+      </ScrollReveal>
     </>
   );
 }

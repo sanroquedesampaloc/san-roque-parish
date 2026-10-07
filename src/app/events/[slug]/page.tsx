@@ -77,7 +77,7 @@ export default async function EventDetailPage({ params }: Props) {
         backLink={{ href: "/events", label: "Back to Events" }}
       />
 
-      <Section bg="default">
+      <Section bg="default" spacing="compact">
         <Container>
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -109,11 +109,15 @@ export default async function EventDetailPage({ params }: Props) {
                 )}
               </div>
 
-              {/* Sidebar */}
+              {/* Sidebar — editorial metadata rail */}
               <aside className="lg:col-span-1">
-                <div className="bg-ivory-warm border border-border p-6 space-y-5">
-                  <div>
-                    <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark mb-2">
+                <div className="bg-ivory-warm border border-border p-6">
+                  <h2 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark mb-4">
+                    Event Details
+                  </h2>
+
+                  <div className="border-b border-border-light pt-0 pb-3">
+                    <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-charcoal-muted mb-1.5">
                       Date
                     </h3>
                     <p className="text-sm text-charcoal font-medium">
@@ -122,8 +126,8 @@ export default async function EventDetailPage({ params }: Props) {
                   </div>
 
                   {(event.startTime || event.endTime) && (
-                    <div>
-                      <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark mb-2">
+                    <div className="border-b border-border-light py-3">
+                      <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-charcoal-muted mb-1.5">
                         Time
                       </h3>
                       <p className="text-sm text-charcoal">
@@ -134,16 +138,16 @@ export default async function EventDetailPage({ params }: Props) {
                   )}
 
                   {event.location && (
-                    <div>
-                      <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark mb-2">
+                    <div className="border-b border-border-light py-3">
+                      <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-charcoal-muted mb-1.5">
                         Location
                       </h3>
                       <p className="text-sm text-charcoal">{event.location}</p>
                     </div>
                   )}
 
-                  <div>
-                    <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark mb-2">
+                  <div className="py-3">
+                    <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-charcoal-muted mb-1.5">
                       Status
                     </h3>
                     <span
@@ -160,7 +164,7 @@ export default async function EventDetailPage({ params }: Props) {
                   </div>
 
                   {event.registrationUrl && (
-                    <div className="pt-2">
+                    <div className="pt-4">
                       <ButtonLink
                         href={event.registrationUrl}
                         variant="primary"

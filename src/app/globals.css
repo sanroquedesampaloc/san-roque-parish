@@ -155,6 +155,22 @@ h1, h2, h3, h4, h5, h6 {
   animation: heroEntrance 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
+/* ── Editorial article rhythm (news/event detail body copy) ── */
+
+.prose-parish {
+  max-width: 42rem;
+}
+
+.prose-parish :where(p) {
+  font-size: 1.0625rem;
+}
+
+@media (width >= 768px) {
+  .prose-parish :where(p) {
+    font-size: 1.125rem;
+  }
+}
+
 /* ── Accent line animation ── */
 
 .accent-line-animated {

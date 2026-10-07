@@ -11,6 +11,8 @@ import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { ScheduleDisplay } from "@/components/ui/ScheduleDisplay";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 export const metadata: Metadata = {
   title: "About",
@@ -28,6 +30,7 @@ export default async function AboutPage() {
     <>
       <Breadcrumbs items={[{ name: "About" }]} />
       <PageHero
+        eyebrow="Who We Are"
         title="About Our Parish"
         subtitle="A Catholic community of faith, worship, and service in Sampaloc, Manila."
       />
@@ -56,28 +59,20 @@ export default async function AboutPage() {
                 </div>
               </div>
 
-              {/* Decorative arch placeholder */}
+              {/* Honest decorative motif (no photo implied — see icon-in-circle fallback pattern used elsewhere on this page) */}
               <div className="md:w-2/5 mt-10 md:mt-0 flex justify-center" aria-hidden="true">
-                <div className="w-56 md:w-64">
-                  <div className="aspect-[3/4] bg-parchment rounded-t-full border border-border overflow-hidden relative">
-                    <div className="absolute inset-4 rounded-t-full border border-gold/15" />
-                    <div className="absolute inset-8 rounded-t-full border border-gold/8" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <svg
-                        className="w-16 h-16 text-burgundy/15"
-                        viewBox="0 0 80 80"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="0.75"
-                      >
-                        <path d="M40 5v70M15 30h50M20 20h40M25 45h30" strokeLinecap="round" />
-                        <circle cx="40" cy="30" r="8" />
-                      </svg>
-                    </div>
+                <div className="w-56 md:w-64 aspect-[3/4] bg-parchment rounded-t-full border border-border flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-full bg-white border border-gold/25 flex items-center justify-center">
+                    <svg
+                      className="w-9 h-9 text-burgundy/35"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={1}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 2.25v19.5M5.25 8.25h13.5" />
+                    </svg>
                   </div>
-                  <p className="mt-2 text-center text-[10px] uppercase tracking-[0.2em] text-charcoal-muted">
-                    Parish Photo
-                  </p>
                 </div>
               </div>
             </div>
@@ -87,6 +82,9 @@ export default async function AboutPage() {
 
       {/* Clergy / Leadership */}
       {clergy.length > 0 && (
+        <>
+          <SectionDivider bg="ivory-warm" />
+          <ScrollReveal>
         <Section bg="warm">
           <Container>
             <SectionHeading
@@ -102,7 +100,7 @@ export default async function AboutPage() {
                 return (
                   <article
                     key={member._id}
-                    className="bg-white border border-border overflow-hidden"
+                    className="bg-white border border-border overflow-hidden card-premium"
                   >
                     <div className="md:flex">
                       {hasPhoto ? (
@@ -153,6 +151,9 @@ export default async function AboutPage() {
             </div>
           </Container>
         </Section>
+          </ScrollReveal>
+          <SectionDivider bg="ivory" />
+        </>
       )}
 
       {/* Call to Action */}
@@ -179,6 +180,7 @@ export default async function AboutPage() {
 
       {/* Parish Information */}
       {(settings?.address || settings?.phone || settings?.email || settings?.officeHours) && (
+        <ScrollReveal delay={80}>
         <Section bg="warm">
           <Container>
             <SectionHeading
@@ -235,6 +237,7 @@ export default async function AboutPage() {
             </div>
           </Container>
         </Section>
+        </ScrollReveal>
       )}
     </>
   );

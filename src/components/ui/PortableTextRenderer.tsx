@@ -1,7 +1,37 @@
+import Image from "next/image";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
+import { urlFor } from "@/sanity/lib/image";
 import type { BlockContent } from "../../../sanity.types";
 
 const components: PortableTextComponents = {
+  types: {
+    image: ({ value }) => {
+      const asset = (value as { asset?: unknown })?.asset;
+      if (!asset) return null;
+      const alt = (value as { alt?: string }).alt ?? "";
+      const caption = (value as { caption?: string }).caption;
+
+      return (
+        <figure className="my-8 border border-border overflow-hidden shadow-premium">
+          <Image
+            src={urlFor(value as Parameters<typeof urlFor>[0])
+              .width(900)
+              .height(560)
+              .url()}
+            alt={alt}
+            width={900}
+            height={560}
+            className="w-full h-auto"
+          />
+          {caption && (
+            <figcaption className="px-4 py-3 text-xs text-charcoal-muted italic bg-ivory-warm">
+              {caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
+  },
   block: {
     h2: ({ children }) => (
       <h2 className="text-2xl font-bold text-charcoal mt-6 mb-3">{children}</h2>

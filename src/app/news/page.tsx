@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { AnnouncementCard } from "@/components/ui/AnnouncementCard";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { parseDateString } from "@/lib/dates";
 import { categoryLabels } from "@/lib/constants";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -29,6 +30,7 @@ export default async function NewsPage() {
     <>
       <Breadcrumbs items={[{ name: "News" }]} />
       <PageHero
+        eyebrow="Parish Publication"
         title="Parish News"
         subtitle="Announcements, updates, and stories from our parish community."
       />
@@ -41,12 +43,16 @@ export default async function NewsPage() {
               cta={{ href: "/", label: "Return Home" }}
             />
           ) : (
-            <div className="max-w-5xl mx-auto">
+            <ScrollReveal className="max-w-5xl mx-auto">
               {/* Featured / Latest */}
               {featured && (
-                <article className="bg-white border border-border overflow-hidden md:flex mb-10">
+                <article
+                  className={`bg-white border border-border overflow-hidden md:flex ${
+                    rest.length > 0 ? "mb-10" : ""
+                  }`}
+                >
                   <div className="md:w-2 bg-burgundy flex-shrink-0" aria-hidden="true" />
-                  <div className="p-8 md:p-10 flex-1">
+                  <div className="p-8 md:p-12 flex-1">
                     <div className="flex items-center gap-3 mb-4">
                       <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white bg-burgundy px-3 py-1">
                         {categoryLabels[featured.category] ?? featured.category}
@@ -87,13 +93,21 @@ export default async function NewsPage() {
 
               {/* Rest */}
               {rest.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div
+                  className={`grid grid-cols-1 gap-6 ${
+                    rest.length === 1
+                      ? "max-w-sm"
+                      : rest.length === 2
+                      ? "md:grid-cols-2"
+                      : "md:grid-cols-2 lg:grid-cols-3"
+                  }`}
+                >
                   {rest.map((item) => (
                     <AnnouncementCard key={item._id} announcement={item} />
                   ))}
                 </div>
               )}
-            </div>
+            </ScrollReveal>
           )}
         </Container>
       </Section>

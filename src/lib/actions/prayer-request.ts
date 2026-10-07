@@ -12,8 +12,6 @@ export type PrayerRequestFormState = {
   fieldErrors?: Record<string, string[]>;
 };
 
-const INITIAL_STATE: PrayerRequestFormState = { status: "idle", message: "" };
-
 export async function submitPrayerRequest(
   _prev: PrayerRequestFormState,
   formData: FormData
@@ -75,5 +73,3 @@ export async function submitPrayerRequest(
       "Thank you for sharing your prayer intention. The parish community will keep you in our prayers.",
   };
 }
-
-export { INITIAL_STATE as prayerRequestInitialState };

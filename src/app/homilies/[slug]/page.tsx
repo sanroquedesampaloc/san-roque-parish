@@ -67,7 +67,7 @@ export default async function HomilyDetailPage({ params }: Props) {
         backLink={{ href: "/homilies", label: "Back to Homilies" }}
       />
 
-      <Section bg="default">
+      <Section bg="default" spacing="compact">
         <Container>
           <div className="max-w-4xl mx-auto">
             {/* Metadata block */}
@@ -95,30 +95,35 @@ export default async function HomilyDetailPage({ params }: Props) {
               )}
             </div>
 
-            {/* Video embed */}
+            {/* Video embed — framed as a deliberate "screening," not a raw iframe */}
             {hasEmbed && (
               <div className="mb-10">
-                <div className="relative w-full pb-[56.25%] bg-charcoal">
-                  {youtubeId && (
-                    <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
-                      title={`Video: ${homily.title}`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full border-0"
-                    />
-                  )}
-                  {vimeoId && (
-                    <iframe
-                      src={`https://player.vimeo.com/video/${vimeoId}?dnt=1`}
-                      title={`Video: ${homily.title}`}
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full border-0"
-                    />
-                  )}
+                <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark mb-3">
+                  Watch
+                </p>
+                <div className="border border-border bg-ivory-warm p-2.5 md:p-3">
+                  <div className="relative w-full pb-[56.25%] bg-charcoal overflow-hidden">
+                    {youtubeId && (
+                      <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${youtubeId}`}
+                        title={`Video: ${homily.title}`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full border-0"
+                      />
+                    )}
+                    {vimeoId && (
+                      <iframe
+                        src={`https://player.vimeo.com/video/${vimeoId}?dnt=1`}
+                        title={`Video: ${homily.title}`}
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                        className="absolute inset-0 w-full h-full border-0"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             )}
@@ -161,7 +166,7 @@ export default async function HomilyDetailPage({ params }: Props) {
 
             {/* Description */}
             {homily.description && (
-              <div className="max-w-3xl">
+              <div className="max-w-[42rem]">
                 <p className="text-charcoal-light text-base md:text-lg leading-relaxed">
                   {homily.description}
                 </p>

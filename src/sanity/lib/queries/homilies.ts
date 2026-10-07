@@ -22,7 +22,8 @@ export const HOMILIES_LIST_QUERY = defineQuery(`
     celebrant,
     thumbnail,
     description,
-    liturgicalOccasion
+    liturgicalOccasion,
+    videoUrl
   }
 `)
 

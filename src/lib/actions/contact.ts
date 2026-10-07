@@ -12,8 +12,6 @@ export type ContactFormState = {
   fieldErrors?: Record<string, string[]>;
 };
 
-const INITIAL_STATE: ContactFormState = { status: "idle", message: "" };
-
 export async function submitContactForm(
   _prev: ContactFormState,
   formData: FormData
@@ -76,5 +74,3 @@ export async function submitContactForm(
       "Thank you for reaching out. We will get back to you as soon as possible.",
   };
 }
-
-export { INITIAL_STATE as contactInitialState };

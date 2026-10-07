@@ -10,6 +10,8 @@ import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { getFileUrl } from "@/sanity/lib/file";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 export const metadata: Metadata = {
   title: "Mass & Sacraments",
@@ -32,8 +34,10 @@ export default async function MassSacramentsPage() {
     <>
       <Breadcrumbs items={[{ name: "Mass & Sacraments" }]} />
       <PageHero
+        eyebrow="Worship & Sacraments"
         title="Mass & Sacraments"
         subtitle="Join us in worship and encounter the grace of the sacraments."
+        motif="cross"
       />
 
       {/* Mass & Confession Schedules */}
@@ -47,7 +51,7 @@ export default async function MassSacramentsPage() {
           {hasSchedules ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {hasSunday && (
-                <div className="bg-burgundy-dark text-white p-8">
+                <div className="bg-burgundy-dark text-white p-8 card-premium">
                   <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-light mb-5">
                     Sunday Mass
                   </h3>
@@ -70,7 +74,7 @@ export default async function MassSacramentsPage() {
               )}
 
               {hasWeekday && (
-                <div className="bg-white border border-border p-8">
+                <div className="bg-white border border-border p-8 card-premium">
                   <ScheduleDisplay
                     schedules={settings!.weekdayMassSchedule}
                     title="Weekday Mass"
@@ -79,7 +83,7 @@ export default async function MassSacramentsPage() {
               )}
 
               {hasConfession && (
-                <div className="bg-white border border-border p-8">
+                <div className="bg-white border border-border p-8 card-premium">
                   <ScheduleDisplay
                     schedules={settings!.confessionSchedule}
                     title="Confession"
@@ -99,6 +103,9 @@ export default async function MassSacramentsPage() {
 
       {/* Sacraments */}
       {sacraments.length > 0 && (
+        <>
+          <SectionDivider bg="ivory" />
+          <ScrollReveal>
         <Section bg="default">
           <Container>
             <SectionHeading
@@ -137,7 +144,7 @@ export default async function MassSacramentsPage() {
                         <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark mb-4">
                           Requirements
                         </h3>
-                        <div className="bg-ivory-warm border border-border-light p-6">
+                        <div className="bg-parchment border border-border-light border-l-2 border-l-gold/50 p-6 md:p-7">
                           <PortableTextRenderer value={sac.requirements} />
                         </div>
                       </div>
@@ -196,9 +203,13 @@ export default async function MassSacramentsPage() {
             </div>
           </Container>
         </Section>
+          </ScrollReveal>
+          <SectionDivider bg="ivory-warm" />
+        </>
       )}
 
       {/* Parish Office */}
+      <ScrollReveal>
       <Section bg="warm" spacing="compact">
         <Container>
           <div className="max-w-2xl mx-auto text-center">
@@ -231,6 +242,7 @@ export default async function MassSacramentsPage() {
           </div>
         </Container>
       </Section>
+      </ScrollReveal>
     </>
   );
 }

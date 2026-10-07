@@ -576,7 +576,7 @@ export type LATEST_HOMILY_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries/homilies.ts
 // Variable: HOMILIES_LIST_QUERY
-// Query: *[_type == "homily"] | order(date desc) {    _id,    title,    "slug": slug.current,    date,    celebrant,    thumbnail,    description,    liturgicalOccasion  }
+// Query: *[_type == "homily"] | order(date desc) {    _id,    title,    "slug": slug.current,    date,    celebrant,    thumbnail,    description,    liturgicalOccasion,    videoUrl  }
 export type HOMILIES_LIST_QUERY_RESULT = Array<{
   _id: string;
   title: string;
@@ -593,6 +593,7 @@ export type HOMILIES_LIST_QUERY_RESULT = Array<{
   } | null;
   description: string | null;
   liturgicalOccasion: string | null;
+  videoUrl: string | null;
 }>;
 
 // Source: src/sanity/lib/queries/homilies.ts
@@ -753,7 +754,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "event" && slug.current == $slug && status != "cancelled"][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    description,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    registrationUrl,\n    featured,\n    status\n  }\n': EVENT_BY_SLUG_QUERY_RESULT;
     '\n  *[_type == "faq"] | order(order asc) {\n    _id,\n    question,\n    answer,\n    order\n  }\n': FAQS_LIST_QUERY_RESULT;
     '\n  *[_type == "homily"] | order(date desc) [0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': LATEST_HOMILY_QUERY_RESULT;
-    '\n  *[_type == "homily"] | order(date desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': HOMILIES_LIST_QUERY_RESULT;
+    '\n  *[_type == "homily"] | order(date desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion,\n    videoUrl\n  }\n': HOMILIES_LIST_QUERY_RESULT;
     '\n  *[_type == "homily" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    videoUrl,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': HOMILY_BY_SLUG_QUERY_RESULT;
     '\n  *[_id == "parishSettings"][0]{\n    parishName,\n    shortDescription,\n    address,\n    phone,\n    email,\n    officeHours,\n    sundayMassSchedule,\n    weekdayMassSchedule,\n    confessionSchedule,\n    facebookUrl,\n    youtubeUrl,\n    messengerUrl,\n    googleMapsUrl,\n    googleMapsEmbedUrl,\n    givingInfo,\n    footerInfo\n  }\n': PARISH_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "clergy"] | order(order asc) {\n    _id,\n    name,\n    position,\n    photo,\n    biography,\n    order\n  }\n': CLERGY_LIST_QUERY_RESULT;

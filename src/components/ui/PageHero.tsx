@@ -1,16 +1,35 @@
 import Link from "next/link";
 
 export function PageHero({
+  eyebrow,
   title,
   subtitle,
   backLink,
+  motif = "none",
 }: {
+  eyebrow?: string;
   title: string;
   subtitle?: string;
   backLink?: { href: string; label: string };
+  motif?: "none" | "cross";
 }) {
+  const compact = Boolean(backLink);
+
   return (
-    <section className="relative bg-burgundy-dark text-white overflow-hidden">
+    <section
+      className={`relative bg-burgundy-dark text-white overflow-hidden ${
+        compact ? "" : "lg:flex lg:items-center lg:min-h-[48svh]"
+      }`}
+    >
+      {/* Atmospheric wash, echoing the homepage hero at a calmer intensity */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 15% 30%, rgba(107,29,42,0.5) 0%, transparent 55%), radial-gradient(ellipse at 85% 70%, rgba(184,148,62,0.07) 0%, transparent 50%)",
+        }}
+        aria-hidden="true"
+      />
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
@@ -21,7 +40,24 @@ export function PageHero({
         aria-hidden="true"
       />
 
-      <div className="container-parish relative py-16 md:py-24">
+      {motif === "cross" && (
+        <svg
+          className="absolute right-[6%] top-1/2 -translate-y-1/2 w-40 h-40 md:w-56 md:h-56 text-gold/[0.07] hidden sm:block"
+          viewBox="0 0 80 80"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="0.75"
+          aria-hidden="true"
+        >
+          <path d="M40 5v70M15 30h50" strokeLinecap="round" />
+        </svg>
+      )}
+
+      <div
+        className={`container-parish relative hero-content ${
+          compact ? "py-12 md:py-16" : "py-16 md:py-24"
+        }`}
+      >
         {backLink && (
           <Link
             href={backLink.href}
@@ -34,11 +70,17 @@ export function PageHero({
           </Link>
         )}
 
-        <p className="text-gold font-medium tracking-[0.25em] uppercase text-xs mb-4">
-          San Roque de Sampaloc Parish
-        </p>
+        {eyebrow && (
+          <p className="text-gold-light font-semibold tracking-[0.25em] uppercase text-xs mb-4">
+            {eyebrow}
+          </p>
+        )}
 
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">
+        <h1
+          className={`font-semibold leading-tight max-w-3xl ${
+            compact ? "text-3xl md:text-4xl" : "text-3xl md:text-4xl lg:text-5xl"
+          }`}
+        >
           {title}
         </h1>
 

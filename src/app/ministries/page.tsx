@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Ministries",
@@ -26,6 +27,7 @@ export default async function MinistriesPage() {
     <>
       <Breadcrumbs items={[{ name: "Ministries" }]} />
       <PageHero
+        eyebrow="Parish Life"
         title="Ministries"
         subtitle="Our parish community serves through various ministries and organizations."
       />
@@ -45,7 +47,7 @@ export default async function MinistriesPage() {
                 subtitle="Get involved in the life of our parish."
               />
 
-              <div className="space-y-16">
+              <ScrollReveal className="space-y-16">
                 {ministries.map((ministry, index) => {
                   const hasImage = ministry.image?.asset;
                   const isEven = index % 2 === 0;
@@ -60,7 +62,7 @@ export default async function MinistriesPage() {
                         {/* Image */}
                         {hasImage && (
                           <div className="md:w-2/5 flex-shrink-0 mb-6 md:mb-0">
-                            <div className="border border-border overflow-hidden">
+                            <div className="border border-border overflow-hidden card-premium">
                               <Image
                                 src={urlFor(ministry.image!).width(480).height(320).url()}
                                 alt={ministry.image!.alt ?? ministry.name}
@@ -141,7 +143,7 @@ export default async function MinistriesPage() {
                     </article>
                   );
                 })}
-              </div>
+              </ScrollReveal>
             </div>
           )}
         </Container>
