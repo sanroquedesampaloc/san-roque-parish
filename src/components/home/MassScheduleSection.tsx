@@ -1,6 +1,7 @@
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { isRedundantScheduleLabel } from "@/lib/schedule";
 import type { ScheduleEntry } from "../../../sanity.types";
 
 type ScheduleArray = Array<{ _key: string } & ScheduleEntry> | null;
@@ -37,28 +38,41 @@ function ScheduleCard({
       </div>
       {hasData ? (
         <ul className="space-y-3">
-          {schedules.map((entry) => (
-            <li
-              key={entry._key}
-              className={`flex flex-col sm:flex-row sm:items-start sm:gap-3 pb-3 last:pb-0 border-b last:border-0 ${
-                accent ? "border-white/10" : "border-border-light"
-              }`}
-            >
-              <span className={`font-semibold sm:min-w-[120px] sm:flex-shrink-0 ${accent ? "text-gold" : "text-burgundy"}`}>
-                {entry.label}
-              </span>
-              <div className="min-w-0">
-                <span className={accent ? "text-white/85" : "text-charcoal-light"}>
-                  {entry.time}
-                </span>
-                {entry.note && (
-                  <p className={`mt-0.5 text-sm italic leading-relaxed ${accent ? "text-white/50" : "text-charcoal-muted"}`}>
-                    {entry.note}
-                  </p>
+          {schedules.map((entry) => {
+            const showLabel = !isRedundantScheduleLabel(entry.label, title);
+            return (
+              <li
+                key={entry._key}
+                className={`flex flex-col sm:flex-row sm:items-start sm:gap-3 pb-3 last:pb-0 border-b last:border-0 ${
+                  accent ? "border-white/10" : "border-border-light"
+                }`}
+              >
+                {showLabel && (
+                  <span className={`font-semibold sm:min-w-[120px] sm:flex-shrink-0 ${accent ? "text-gold" : "text-burgundy"}`}>
+                    {entry.label}
+                  </span>
                 )}
-              </div>
-            </li>
-          ))}
+                <div className="min-w-0">
+                  <span
+                    className={
+                      showLabel
+                        ? accent
+                          ? "text-white/85"
+                          : "text-charcoal-light"
+                        : `font-semibold text-base ${accent ? "text-white" : "text-charcoal"}`
+                    }
+                  >
+                    {entry.time}
+                  </span>
+                  {entry.note && (
+                    <p className={`mt-0.5 text-sm italic leading-relaxed ${accent ? "text-white/50" : "text-charcoal-muted"}`}>
+                      {entry.note}
+                    </p>
+                  )}
+                </div>
+              </li>
+            );
+          })}
         </ul>
       ) : (
         <p className={`text-sm italic ${accent ? "text-white/60" : "text-charcoal-muted"}`}>

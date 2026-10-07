@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ScheduleDisplay } from "@/components/ui/ScheduleDisplay";
+import { isRedundantScheduleLabel } from "@/lib/schedule";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { getFileUrl } from "@/sanity/lib/file";
@@ -62,19 +63,32 @@ export default async function MassSacramentsPage() {
                     Sunday Mass
                   </h3>
                   <ul className="space-y-3">
-                    {settings!.sundayMassSchedule!.map((entry) => (
-                      <li key={entry._key} className="border-b border-white/10 pb-3 last:border-0 last:pb-0">
-                        <span className="block font-semibold text-white text-sm">
-                          {entry.label}
-                        </span>
-                        <span className="block text-white/70 text-sm">{entry.time}</span>
-                        {entry.note && (
-                          <span className="block text-white/50 text-xs italic mt-1">
-                            {entry.note}
+                    {settings!.sundayMassSchedule!.map((entry) => {
+                      const showLabel = !isRedundantScheduleLabel(entry.label, "Sunday Mass");
+                      return (
+                        <li key={entry._key} className="border-b border-white/10 pb-3 last:border-0 last:pb-0">
+                          {showLabel && (
+                            <span className="block font-semibold text-white text-sm">
+                              {entry.label}
+                            </span>
+                          )}
+                          <span
+                            className={
+                              showLabel
+                                ? "block text-white/70 text-sm"
+                                : "block font-semibold text-white text-base"
+                            }
+                          >
+                            {entry.time}
                           </span>
-                        )}
-                      </li>
-                    ))}
+                          {entry.note && (
+                            <span className="block text-white/50 text-xs italic mt-1">
+                              {entry.note}
+                            </span>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -167,7 +181,7 @@ export default async function MassSacramentsPage() {
 
                     {sac.schedule && sac.schedule.length > 0 && (
                       <div>
-                        <ScheduleDisplay schedules={sac.schedule} title="Schedule" />
+                        <ScheduleDisplay schedules={sac.schedule} title="Schedule" redundantWith={sac.name} />
                       </div>
                     )}
 
