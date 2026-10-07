@@ -70,6 +70,14 @@ export const parishSettings = defineType({
     defineField({
       name: 'weekdayMassSchedule',
       title: 'Weekday Mass Schedule',
+      description: 'Monday–Friday Masses only. Use Saturday Mass Schedule below for Saturday.',
+      type: 'array',
+      of: [defineArrayMember({type: 'scheduleEntry'})],
+      group: 'schedules',
+    }),
+    defineField({
+      name: 'saturdayMassSchedule',
+      title: 'Saturday Mass Schedule',
       type: 'array',
       of: [defineArrayMember({type: 'scheduleEntry'})],
       group: 'schedules',

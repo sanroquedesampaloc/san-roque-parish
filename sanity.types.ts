@@ -118,6 +118,11 @@ export type ParishSettings = {
       _key: string;
     } & ScheduleEntry
   >;
+  saturdayMassSchedule?: Array<
+    {
+      _key: string;
+    } & ScheduleEntry
+  >;
   confessionSchedule?: Array<
     {
       _key: string;
@@ -620,7 +625,7 @@ export type HOMILY_BY_SLUG_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries/parish.ts
 // Variable: PARISH_SETTINGS_QUERY
-// Query: *[_id == "parishSettings"][0]{    parishName,    shortDescription,    address,    phone,    email,    officeHours,    sundayMassSchedule,    weekdayMassSchedule,    confessionSchedule,    facebookUrl,    youtubeUrl,    messengerUrl,    googleMapsUrl,    googleMapsEmbedUrl,    givingInfo,    footerInfo  }
+// Query: *[_id == "parishSettings"][0]{    parishName,    shortDescription,    address,    phone,    email,    officeHours,    sundayMassSchedule,    weekdayMassSchedule,    saturdayMassSchedule,    confessionSchedule,    facebookUrl,    youtubeUrl,    messengerUrl,    googleMapsUrl,    googleMapsEmbedUrl,    givingInfo,    footerInfo  }
 export type PARISH_SETTINGS_QUERY_RESULT =
   | {
       parishName: null;
@@ -631,6 +636,7 @@ export type PARISH_SETTINGS_QUERY_RESULT =
       officeHours: null;
       sundayMassSchedule: null;
       weekdayMassSchedule: null;
+      saturdayMassSchedule: null;
       confessionSchedule: null;
       facebookUrl: null;
       youtubeUrl: null;
@@ -657,6 +663,11 @@ export type PARISH_SETTINGS_QUERY_RESULT =
         } & ScheduleEntry
       > | null;
       weekdayMassSchedule: Array<
+        {
+          _key: string;
+        } & ScheduleEntry
+      > | null;
+      saturdayMassSchedule: Array<
         {
           _key: string;
         } & ScheduleEntry
@@ -756,7 +767,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "homily"] | order(date desc) [0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': LATEST_HOMILY_QUERY_RESULT;
     '\n  *[_type == "homily"] | order(date desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion,\n    videoUrl\n  }\n': HOMILIES_LIST_QUERY_RESULT;
     '\n  *[_type == "homily" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    videoUrl,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': HOMILY_BY_SLUG_QUERY_RESULT;
-    '\n  *[_id == "parishSettings"][0]{\n    parishName,\n    shortDescription,\n    address,\n    phone,\n    email,\n    officeHours,\n    sundayMassSchedule,\n    weekdayMassSchedule,\n    confessionSchedule,\n    facebookUrl,\n    youtubeUrl,\n    messengerUrl,\n    googleMapsUrl,\n    googleMapsEmbedUrl,\n    givingInfo,\n    footerInfo\n  }\n': PARISH_SETTINGS_QUERY_RESULT;
+    '\n  *[_id == "parishSettings"][0]{\n    parishName,\n    shortDescription,\n    address,\n    phone,\n    email,\n    officeHours,\n    sundayMassSchedule,\n    weekdayMassSchedule,\n    saturdayMassSchedule,\n    confessionSchedule,\n    facebookUrl,\n    youtubeUrl,\n    messengerUrl,\n    googleMapsUrl,\n    googleMapsEmbedUrl,\n    givingInfo,\n    footerInfo\n  }\n': PARISH_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "clergy"] | order(order asc) {\n    _id,\n    name,\n    position,\n    photo,\n    biography,\n    order\n  }\n': CLERGY_LIST_QUERY_RESULT;
     '\n  *[_type == "ministry"] | order(order asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    image,\n    description,\n    coordinator,\n    contactInfo,\n    meetingSchedule,\n    order\n  }\n': MINISTRIES_LIST_QUERY_RESULT;
     '\n  *[_type == "sacrament"] | order(order asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    introduction,\n    requirements,\n    schedule,\n    contactGuidance,\n    documents,\n    order\n  }\n': SACRAMENTS_LIST_QUERY_RESULT;

@@ -27,8 +27,10 @@ export default async function MassSacramentsPage() {
 
   const hasSunday = settings?.sundayMassSchedule && settings.sundayMassSchedule.length > 0;
   const hasWeekday = settings?.weekdayMassSchedule && settings.weekdayMassSchedule.length > 0;
+  const hasSaturday = settings?.saturdayMassSchedule && settings.saturdayMassSchedule.length > 0;
   const hasConfession = settings?.confessionSchedule && settings.confessionSchedule.length > 0;
-  const hasSchedules = hasSunday || hasWeekday || hasConfession;
+  const hasSchedules = hasSunday || hasWeekday || hasSaturday || hasConfession;
+  const scheduleCardCount = [hasSunday, hasWeekday, hasSaturday, hasConfession].filter(Boolean).length;
 
   return (
     <>
@@ -49,7 +51,11 @@ export default async function MassSacramentsPage() {
           />
 
           {hasSchedules ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div
+              className={`grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto ${
+                scheduleCardCount >= 4 ? "max-w-7xl xl:grid-cols-4" : "max-w-5xl lg:grid-cols-3"
+              }`}
+            >
               {hasSunday && (
                 <div className="bg-burgundy-dark text-white p-8 card-premium">
                   <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-light mb-5">
@@ -78,6 +84,15 @@ export default async function MassSacramentsPage() {
                   <ScheduleDisplay
                     schedules={settings!.weekdayMassSchedule}
                     title="Weekday Mass"
+                  />
+                </div>
+              )}
+
+              {hasSaturday && (
+                <div className="bg-white border border-border p-8 card-premium">
+                  <ScheduleDisplay
+                    schedules={settings!.saturdayMassSchedule}
+                    title="Saturday Mass"
                   />
                 </div>
               )}

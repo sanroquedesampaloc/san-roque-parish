@@ -10,6 +10,7 @@ export const PARISH_SETTINGS_QUERY = defineQuery(`
     officeHours,
     sundayMassSchedule,
     weekdayMassSchedule,
+    saturdayMassSchedule,
     confessionSchedule,
     facebookUrl,
     youtubeUrl,

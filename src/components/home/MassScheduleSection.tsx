@@ -40,21 +40,23 @@ function ScheduleCard({
           {schedules.map((entry) => (
             <li
               key={entry._key}
-              className={`flex flex-col sm:flex-row sm:items-baseline sm:gap-3 md:flex-col md:items-start md:gap-0 lg:flex-row lg:items-baseline lg:gap-3 pb-3 last:pb-0 border-b last:border-0 ${
+              className={`flex flex-col sm:flex-row sm:items-start sm:gap-3 pb-3 last:pb-0 border-b last:border-0 ${
                 accent ? "border-white/10" : "border-border-light"
               }`}
             >
-              <span className={`font-semibold min-w-[140px] ${accent ? "text-gold" : "text-burgundy"}`}>
+              <span className={`font-semibold sm:min-w-[120px] sm:flex-shrink-0 ${accent ? "text-gold" : "text-burgundy"}`}>
                 {entry.label}
               </span>
-              <span className={`min-w-0 ${accent ? "text-white/85" : "text-charcoal-light"}`}>
-                {entry.time}
-              </span>
-              {entry.note && (
-                <span className={`min-w-0 text-sm italic ${accent ? "text-white/50" : "text-charcoal-muted"}`}>
-                  ({entry.note})
+              <div className="min-w-0">
+                <span className={accent ? "text-white/85" : "text-charcoal-light"}>
+                  {entry.time}
                 </span>
-              )}
+                {entry.note && (
+                  <p className={`mt-0.5 text-sm italic leading-relaxed ${accent ? "text-white/50" : "text-charcoal-muted"}`}>
+                    {entry.note}
+                  </p>
+                )}
+              </div>
             </li>
           ))}
         </ul>
@@ -73,17 +75,19 @@ export function MassScheduleSection({
   settings: {
     sundayMassSchedule: ScheduleArray;
     weekdayMassSchedule: ScheduleArray;
+    saturdayMassSchedule: ScheduleArray;
     confessionSchedule: ScheduleArray;
   } | null;
 }) {
   if (!settings) return null;
 
-  const hasSchedules =
-    settings.sundayMassSchedule?.length ||
-    settings.weekdayMassSchedule?.length ||
-    settings.confessionSchedule?.length;
+  const hasSunday = (settings.sundayMassSchedule?.length ?? 0) > 0;
+  const hasWeekday = (settings.weekdayMassSchedule?.length ?? 0) > 0;
+  const hasSaturday = (settings.saturdayMassSchedule?.length ?? 0) > 0;
+  const hasConfession = (settings.confessionSchedule?.length ?? 0) > 0;
+  const cardCount = [hasSunday, hasWeekday, hasSaturday, hasConfession].filter(Boolean).length;
 
-  if (!hasSchedules) return null;
+  if (cardCount === 0) return null;
 
   return (
     <Section id="mass-schedule" bg="warm" spacing="default">
@@ -93,20 +97,23 @@ export function MassScheduleSection({
           title="Mass & Confession Schedule"
           size="large"
         />
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          <ScheduleCard
-            title="Sunday Mass"
-            schedules={settings.sundayMassSchedule}
-            accent
-          />
-          <ScheduleCard
-            title="Weekday Mass"
-            schedules={settings.weekdayMassSchedule}
-          />
-          <ScheduleCard
-            title="Confession"
-            schedules={settings.confessionSchedule}
-          />
+        <div
+          className={`mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 ${
+            cardCount >= 4 ? "max-w-7xl xl:grid-cols-4" : "max-w-5xl lg:grid-cols-3"
+          }`}
+        >
+          {hasSunday && (
+            <ScheduleCard title="Sunday Mass" schedules={settings.sundayMassSchedule} accent />
+          )}
+          {hasWeekday && (
+            <ScheduleCard title="Weekday Mass" schedules={settings.weekdayMassSchedule} />
+          )}
+          {hasSaturday && (
+            <ScheduleCard title="Saturday Mass" schedules={settings.saturdayMassSchedule} />
+          )}
+          {hasConfession && (
+            <ScheduleCard title="Confession" schedules={settings.confessionSchedule} />
+          )}
         </div>
       </Container>
     </Section>
