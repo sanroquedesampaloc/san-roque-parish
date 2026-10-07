@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback, type RefObject } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 
 const FOCUSABLE_SELECTOR =
@@ -77,7 +78,7 @@ export function MobileNav({
 
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
       <div className="fixed inset-0 bg-charcoal/50" onClick={onClose} aria-hidden="true" />
       <div ref={panelRef} className="fixed inset-y-0 right-0 w-full max-w-xs bg-ivory shadow-2xl flex flex-col">
@@ -124,6 +125,7 @@ export function MobileNav({
           <p className="text-xs text-charcoal-muted tracking-wide uppercase">San Roque de Sampaloc Parish</p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

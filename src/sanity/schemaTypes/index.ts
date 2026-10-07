@@ -6,6 +6,7 @@ import {scheduleEntry} from './objects/scheduleEntry'
 import {announcement} from './documents/announcement'
 import {clergy} from './documents/clergy'
 import {event} from './documents/event'
+import {faq} from './documents/faq'
 import {homily} from './documents/homily'
 import {ministry} from './documents/ministry'
 import {parishSettings} from './documents/parishSettings'
@@ -19,6 +20,7 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     announcement,
     clergy,
     event,
+    faq,
     homily,
     ministry,
     parishSettings,

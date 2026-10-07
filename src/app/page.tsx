@@ -4,6 +4,7 @@ import { MINISTRIES_LIST_QUERY, SACRAMENTS_LIST_QUERY } from "@/sanity/lib/queri
 import { FEATURED_ANNOUNCEMENT_QUERY, ANNOUNCEMENTS_LIST_QUERY } from "@/sanity/lib/queries/announcements";
 import { UPCOMING_EVENTS_QUERY } from "@/sanity/lib/queries/events";
 import { LATEST_HOMILY_QUERY } from "@/sanity/lib/queries/homilies";
+import { FAQS_LIST_QUERY } from "@/sanity/lib/queries/faqs";
 import { getPlaceDetails } from "@/lib/google-places";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionDivider } from "@/components/ui/SectionDivider";
@@ -16,6 +17,7 @@ import { LatestHomilySection } from "@/components/home/LatestHomilySection";
 import { MinistriesSection } from "@/components/home/MinistriesSection";
 import { PrayerRequestSection } from "@/components/home/PrayerRequestSection";
 import { GoogleReviewsSection } from "@/components/home/GoogleReviewsSection";
+import { FAQSection } from "@/components/home/FAQSection";
 import { SupportParishSection } from "@/components/home/SupportParishSection";
 import { VisitContactSection } from "@/components/home/VisitContactSection";
 
@@ -28,6 +30,7 @@ export default async function HomePage() {
     { data: sacraments },
     { data: homily },
     { data: ministries },
+    { data: faqs },
     placeDetails,
   ] = await Promise.all([
     sanityFetch({ query: PARISH_SETTINGS_QUERY }),
@@ -37,6 +40,7 @@ export default async function HomePage() {
     sanityFetch({ query: SACRAMENTS_LIST_QUERY }),
     sanityFetch({ query: LATEST_HOMILY_QUERY }),
     sanityFetch({ query: MINISTRIES_LIST_QUERY }),
+    sanityFetch({ query: FAQS_LIST_QUERY }),
     getPlaceDetails(),
   ]);
 
@@ -84,6 +88,12 @@ export default async function HomePage() {
 
       <ScrollReveal delay={80}>
         <GoogleReviewsSection place={placeDetails} />
+      </ScrollReveal>
+
+      <SectionDivider bg="white" />
+
+      <ScrollReveal delay={80}>
+        <FAQSection faqs={faqs} />
       </ScrollReveal>
 
       <SectionDivider bg="ivory-warm" />

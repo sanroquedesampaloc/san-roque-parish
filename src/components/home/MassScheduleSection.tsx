@@ -40,18 +40,18 @@ function ScheduleCard({
           {schedules.map((entry) => (
             <li
               key={entry._key}
-              className={`flex flex-col sm:flex-row sm:items-baseline sm:gap-3 pb-3 last:pb-0 border-b last:border-0 ${
+              className={`flex flex-col sm:flex-row sm:items-baseline sm:gap-3 md:flex-col md:items-start md:gap-0 lg:flex-row lg:items-baseline lg:gap-3 pb-3 last:pb-0 border-b last:border-0 ${
                 accent ? "border-white/10" : "border-border-light"
               }`}
             >
               <span className={`font-semibold min-w-[140px] ${accent ? "text-gold" : "text-burgundy"}`}>
                 {entry.label}
               </span>
-              <span className={accent ? "text-white/85" : "text-charcoal-light"}>
+              <span className={`min-w-0 ${accent ? "text-white/85" : "text-charcoal-light"}`}>
                 {entry.time}
               </span>
               {entry.note && (
-                <span className={`text-sm italic ${accent ? "text-white/50" : "text-charcoal-muted"}`}>
+                <span className={`min-w-0 text-sm italic ${accent ? "text-white/50" : "text-charcoal-muted"}`}>
                   ({entry.note})
                 </span>
               )}

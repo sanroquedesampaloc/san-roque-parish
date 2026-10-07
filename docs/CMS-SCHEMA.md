@@ -10,6 +10,7 @@
 | `ministry` | Parish ministries and organizations | yes | by displayOrder |
 | `clergy` | Priests and parish staff | no | by displayOrder |
 | `sacrament` | Sacrament information and requirements | yes | by displayOrder |
+| `faq` | Frequently asked questions (homepage) | no | by displayOrder |
 | `parishSettings` | Global parish configuration (singleton) | no | n/a |
 
 ## Reusable Object Types
@@ -26,7 +27,8 @@ Parish
 ├── Parish Settings (singleton editor)
 ├── Clergy
 ├── Ministries
-└── Sacraments
+├── Sacraments
+└── FAQs
 
 Content
 ├── Announcements

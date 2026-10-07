@@ -12,7 +12,7 @@ const variants = {
     "border border-burgundy text-burgundy hover:bg-burgundy hover:text-white focus-visible:outline-burgundy",
   gold: "bg-gold text-charcoal hover:bg-gold-light focus-visible:outline-gold",
   "outline-light":
-    "border border-white/40 text-white hover:bg-white/10 focus-visible:outline-white",
+    "border border-ivory/40 text-ivory hover:bg-ivory/10 focus-visible:outline-ivory",
 };
 
 function isExternal(href: string): boolean {

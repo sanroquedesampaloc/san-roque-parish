@@ -1,4 +1,5 @@
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { HeroBackgroundMedia } from "@/components/home/HeroBackgroundMedia";
 
 export function HeroSection({
   settings,
@@ -9,128 +10,100 @@ export function HeroSection({
   } | null;
 }) {
   return (
-    <section className="relative bg-burgundy-dark text-white overflow-hidden">
-      {/* Layered gradient atmosphere */}
+    <section
+      className="relative flex min-h-[85svh] items-center overflow-hidden bg-charcoal text-ivory md:min-h-[calc(100svh-4.625rem)]"
+    >
+      {/* Full-bleed background: looping video on tablet/desktop with no
+          motion-reduction preference, static poster image otherwise
+          (mobile widths, prefers-reduced-motion: reduce, or no JS). See
+          HeroBackgroundMedia for why this needs to be a client component. */}
+      <HeroBackgroundMedia />
+
+      {/* Text-legibility scrim only, no global color wash over the footage.
+          Desktop (lg+, 1024px), where the layout splits into the
+          asymmetric text-left/reliquary-right composition: neutral,
+          horizontal, concentrated behind the left text column and fully
+          transparent by the time it reaches the reliquary on the right.
+          Below lg (mobile through tablet/portrait widths) the text column
+          stacks full-width over the full-bleed image/video, so a top/bottom
+          vignette protects the eyebrow/headline and the CTAs instead — the
+          two-column split was tried down to 768px, but at tall/narrow
+          tablet ratios object-cover has to crop so tightly that the
+          reliquary fills nearly the entire visible frame no matter the
+          object-position, leaving no clean negative space beside it; the
+          full-width stacked treatment reads far more composed at that
+          range. */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 hidden lg:block"
         style={{
           background:
-            "radial-gradient(ellipse at 20% 50%, rgba(107,29,42,0.6) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(184,148,62,0.08) 0%, transparent 50%)",
+            "linear-gradient(90deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.37) 20%, rgba(0,0,0,0.18) 45%, rgba(0,0,0,0.06) 65%, transparent 80%)",
         }}
         aria-hidden="true"
       />
-
-      {/* Subtle grid texture */}
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 lg:hidden"
         style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0v80M0 40h80' stroke='%23ffffff' stroke-width='0.3' fill='none'/%3E%3C/svg%3E\")",
-          backgroundSize: "80px 80px",
+          background:
+            "linear-gradient(180deg, rgba(0,0,0,0.52) 0%, rgba(0,0,0,0.42) 30%, rgba(0,0,0,0.40) 55%, rgba(0,0,0,0.52) 100%)",
         }}
         aria-hidden="true"
       />
 
-      {/* Floating decorative elements */}
-      <div
-        className="absolute top-20 left-[10%] w-1 h-1 rounded-full bg-gold/30"
-        style={{ animation: "gentleFloat 6s ease-in-out infinite" }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute top-32 right-[15%] w-1.5 h-1.5 rounded-full bg-gold/20"
-        style={{ animation: "gentleFloat 8s ease-in-out infinite 1s" }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-28 left-[25%] w-1 h-1 rounded-full bg-gold/25"
-        style={{ animation: "gentleFloat 7s ease-in-out infinite 2s" }}
-        aria-hidden="true"
-      />
-
-      <div className="container-parish relative">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center py-20 md:py-28 lg:py-36">
-          <div className="lg:col-span-3 hero-content">
-            <p className="text-gold-shimmer font-semibold tracking-[0.3em] uppercase text-xs mb-6">
-              Welcome to
-            </p>
-            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-semibold leading-[1.08] mb-6 tracking-tight">
+      <div className="container-parish relative w-full py-14 lg:py-0">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-5 lg:gap-12">
+          <div className="hero-content lg:col-span-3">
+            <div className="mb-4 flex items-center gap-3">
+              <span className="h-px w-8 bg-gold/70" aria-hidden="true" />
+              {/* Solid (non-transparent) label chip rather than text laid
+                  directly over the scrim: measured against real video
+                  frames, antique-gold text at this small size cannot reach
+                  WCAG AA (4.5:1) over this footage without darkening the
+                  shared scrim far beyond the brief's "barely-there" bound —
+                  an opaque backing guarantees reliable contrast in every
+                  frame instead of depending on video content. */}
+              <span className="bg-charcoal/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-gold-light">
+                Welcome to
+              </span>
+            </div>
+            <h1 className="mb-6 max-w-2xl text-4xl font-medium leading-[1.08] tracking-tight text-ivory md:text-5xl lg:text-[3.5rem] xl:text-6xl">
               {settings?.parishName ?? "San Roque de Sampaloc Parish"}
             </h1>
             {settings?.shortDescription ? (
-              <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-10 max-w-xl">
+              <p className="mb-10 max-w-md text-lg leading-relaxed text-ivory/80 md:text-xl">
                 {settings.shortDescription}
               </p>
             ) : (
-              <p className="text-lg md:text-xl text-white/70 leading-relaxed mb-10 max-w-xl">
+              <p className="mb-10 max-w-md text-lg leading-relaxed text-ivory/80 md:text-xl">
                 A Catholic community of faith, worship, and service in the heart
                 of Sampaloc, Manila.
               </p>
             )}
-            <div className="flex flex-wrap gap-4">
-              <ButtonLink href="#mass-schedule" variant="gold">
+            <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+              <ButtonLink
+                href="#mass-schedule"
+                variant="gold"
+                className="w-full sm:w-auto"
+              >
                 Mass Schedule
               </ButtonLink>
-              <ButtonLink href="/contact" variant="outline-light">
+              <ButtonLink
+                href="/contact"
+                variant="outline-light"
+                className="w-full sm:w-auto"
+              >
                 Plan Your Visit
               </ButtonLink>
-            </div>
-          </div>
-
-          <div
-            className="lg:col-span-2 flex justify-center lg:justify-end hero-visual"
-            aria-hidden="true"
-          >
-            <div className="relative w-64 md:w-72 lg:w-80">
-              <div className="aspect-[3/4] bg-burgundy rounded-t-full border border-white/10 overflow-hidden relative">
-                {/* Premium gradient overlay */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(170deg, rgba(184,148,62,0.12) 0%, transparent 40%, rgba(83,23,34,0.3) 100%)",
-                  }}
-                />
-
-                {/* Refined concentric arches */}
-                <div className="absolute inset-3 rounded-t-full border border-gold/12" />
-                <div className="absolute inset-6 rounded-t-full border border-gold/8" />
-                <div className="absolute inset-10 rounded-t-full border border-gold/5" />
-
-                {/* Cross icon */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <svg
-                    className="w-20 h-20 text-gold/15"
-                    viewBox="0 0 80 80"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="0.75"
-                  >
-                    <path
-                      d="M40 5v70M15 30h50M20 20h40M25 45h30"
-                      strokeLinecap="round"
-                    />
-                    <circle cx="40" cy="30" r="8" />
-                  </svg>
-                </div>
-
-                {/* Bottom vignette */}
-                <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-burgundy-dark/80 to-transparent" />
-              </div>
-
-              <div className="mt-3 text-center">
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/25">
-                  Parish Photo
-                </p>
-              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom gradient transition */}
+      {/* Short, crisp seam into the ivory Mass & Confession Schedule section
+          below — the footage should stay visually clear almost to the very
+          bottom of the hero. */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-ivory to-transparent"
+        className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-ivory to-transparent md:h-12"
         aria-hidden="true"
       />
     </section>

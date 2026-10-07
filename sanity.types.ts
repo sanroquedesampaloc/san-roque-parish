@@ -194,6 +194,17 @@ export type Homily = {
   liturgicalOccasion?: string;
 };
 
+export type Faq = {
+  _id: string;
+  _type: "faq";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  question: string;
+  answer: BlockContent;
+  order?: number;
+};
+
 export type Event = {
   _id: string;
   _type: "event";
@@ -380,6 +391,7 @@ export type AllSanitySchemaTypes =
   | SanityImageCrop
   | SanityImageHotspot
   | Homily
+  | Faq
   | Event
   | Clergy
   | Announcement
@@ -530,6 +542,16 @@ export type EVENT_BY_SLUG_QUERY_RESULT = {
   featured: boolean | null;
   status: "cancelled" | "completed" | "ongoing" | "upcoming";
 } | null;
+
+// Source: src/sanity/lib/queries/faqs.ts
+// Variable: FAQS_LIST_QUERY
+// Query: *[_type == "faq"] | order(order asc) {    _id,    question,    answer,    order  }
+export type FAQS_LIST_QUERY_RESULT = Array<{
+  _id: string;
+  question: string;
+  answer: BlockContent;
+  order: number | null;
+}>;
 
 // Source: src/sanity/lib/queries/homilies.ts
 // Variable: LATEST_HOMILY_QUERY
@@ -729,6 +751,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "event" && status in ["upcoming", "ongoing"]]\n    | order(startDate asc) {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    featured,\n    status\n  }\n': UPCOMING_EVENTS_QUERY_RESULT;
     '\n  *[_type == "event" && status != "cancelled"] | order(startDate desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    featured,\n    status\n  }\n': EVENTS_LIST_QUERY_RESULT;
     '\n  *[_type == "event" && slug.current == $slug && status != "cancelled"][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    description,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    registrationUrl,\n    featured,\n    status\n  }\n': EVENT_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "faq"] | order(order asc) {\n    _id,\n    question,\n    answer,\n    order\n  }\n': FAQS_LIST_QUERY_RESULT;
     '\n  *[_type == "homily"] | order(date desc) [0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': LATEST_HOMILY_QUERY_RESULT;
     '\n  *[_type == "homily"] | order(date desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': HOMILIES_LIST_QUERY_RESULT;
     '\n  *[_type == "homily" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    videoUrl,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': HOMILY_BY_SLUG_QUERY_RESULT;

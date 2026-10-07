@@ -77,4 +77,61 @@ test.describe("Mobile navigation", () => {
     await page.keyboard.press("Escape");
     await expect(dialog).not.toBeVisible();
   });
+
+  test("Donate CTA and all nav links are visible or reachable via menu scroll", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /open menu/i }).click();
+
+    const dialog = page.getByRole("dialog", { name: /mobile/i });
+    await expect(dialog).toBeVisible();
+
+    const expectedLinks = [
+      "Donate",
+      "Home",
+      "About",
+      "Sacraments",
+      "Ministries",
+      "News",
+      "Events",
+      "Homilies",
+      "Contact",
+    ];
+
+    for (const name of expectedLinks) {
+      const link = dialog.getByRole("link", { name, exact: true });
+      await link.scrollIntoViewIfNeeded();
+      await expect(link).toBeVisible();
+    }
+  });
+
+  test("background is not interactive while mobile menu is open", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const heroLink = page.locator("main a").first();
+    const heroBox = await heroLink.boundingBox();
+    expect(heroBox).not.toBeNull();
+
+    await page.getByRole("button", { name: /open menu/i }).click();
+    const dialog = page.getByRole("dialog", { name: /mobile/i });
+    await expect(dialog).toBeVisible();
+
+    const topElementAtHeroPoint = await page.evaluate(
+      ({ x, y }) => {
+        const el = document.elementFromPoint(x, y);
+        return {
+          insideDialog: !!el?.closest('[role="dialog"]'),
+          tag: el?.tagName,
+        };
+      },
+      { x: heroBox!.x + heroBox!.width / 2, y: heroBox!.y + heroBox!.height / 2 }
+    );
+
+    expect(topElementAtHeroPoint.insideDialog).toBe(true);
+
+    await expect(page.locator("body")).toHaveCSS("overflow", "hidden");
+  });
 });

@@ -22,6 +22,7 @@ export const structure: StructureResolver = (S) =>
               S.documentTypeListItem('clergy').title('Clergy'),
               S.documentTypeListItem('ministry').title('Ministries'),
               S.documentTypeListItem('sacrament').title('Sacraments'),
+              S.documentTypeListItem('faq').title('FAQs'),
             ]),
         ),
       S.divider(),
