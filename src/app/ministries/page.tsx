@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Ministries",
@@ -23,6 +24,7 @@ export default async function MinistriesPage() {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Ministries" }]} />
       <PageHero
         title="Ministries"
         subtitle="Our parish community serves through various ministries and organizations."

@@ -97,6 +97,15 @@ export function MobileNav({
           </button>
         </div>
         <nav className="flex-1 overflow-y-auto py-6" aria-label="Mobile navigation">
+          <div className="px-4 mb-4">
+            <Link
+              href="/give"
+              onClick={onClose}
+              className="flex items-center justify-center w-full px-4 py-3 text-sm font-semibold uppercase tracking-wider bg-gold text-charcoal hover:bg-gold-light transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              Donate
+            </Link>
+          </div>
           <ul className="space-y-0.5 px-4">
             {links.map((link) => (
               <li key={link.href}>

@@ -17,7 +17,11 @@ export async function Footer() {
 
   return (
     <footer className="bg-charcoal text-white/75">
-      <div className="h-px bg-gold/30" aria-hidden="true" />
+      <div
+        className="h-px"
+        style={{ background: "linear-gradient(90deg, transparent, var(--color-gold), transparent)" }}
+        aria-hidden="true"
+      />
 
       <div className="container-parish py-14 md:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">

@@ -9,6 +9,7 @@ import { HomilyCard } from "@/components/ui/HomilyCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { parseDateString } from "@/lib/dates";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Homilies",
@@ -26,6 +27,7 @@ export default async function HomiliesPage() {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Homilies" }]} />
       <PageHero
         title="Homilies"
         subtitle="Reflections on Scripture from our parish celebrations."

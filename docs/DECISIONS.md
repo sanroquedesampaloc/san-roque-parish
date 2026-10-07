@@ -35,3 +35,27 @@ No Express server, API layer, or database beyond Sanity.
 Mass times, confession schedules, and office hours stored as arrays of `scheduleEntry` objects (label + time + optional note) rather than free-text.
 
 **Rationale**: Enables consistent rendering and future features (e.g., "next Mass" calculations) without parsing free-form text.
+
+## ADR-007: Server Actions for Form Submission
+
+Use React Server Actions (via `useActionState`) instead of API Route Handlers for contact and prayer request forms.
+
+**Rationale**: Server Actions integrate naturally with React's form handling, provide built-in pending states, work with progressive enhancement, and avoid maintaining separate API routes. The `useActionState` hook gives typed state transitions (idle → pending → success/error) without extra client-side state management.
+
+## ADR-008: In-Memory Rate Limiting
+
+Use an in-memory `Map` for rate limiting form submissions instead of an external store.
+
+**Rationale**: No paid dependency required. Provides baseline protection against rapid repeated submissions within a single serverless instance lifetime. The primary spam defense is Cloudflare Turnstile — rate limiting is a secondary layer. For production-grade rate limiting that survives cold starts, upgrade to Vercel KV or Upstash Redis.
+
+## ADR-009: No Database Storage for Form Submissions
+
+Contact messages and prayer requests are emailed directly to parish staff and not stored in any database.
+
+**Rationale**: Reduces data liability — no sensitive prayer content or personal data is persisted. Parish staff manage messages through their email inbox. If archival is needed later, Resend provides delivery logs, or a database can be added as a future enhancement.
+
+## ADR-010: Cloudflare Turnstile over reCAPTCHA
+
+Use Cloudflare Turnstile for form spam protection instead of Google reCAPTCHA.
+
+**Rationale**: Privacy-focused (no tracking cookies), free, simpler integration, and does not require users to solve visual challenges. Server-side verification via a single POST request to Cloudflare's API.

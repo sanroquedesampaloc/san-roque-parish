@@ -18,7 +18,7 @@ type Announcement = {
 
 function FeaturedCard({ announcement }: { announcement: Announcement }) {
   return (
-    <article className="bg-white border border-border overflow-hidden md:flex group">
+    <article className="bg-white border border-border overflow-hidden md:flex card-premium group">
       <div className="md:w-2 bg-burgundy flex-shrink-0" aria-hidden="true" />
       <div className="p-8 md:p-10 flex-1">
         <div className="flex items-center gap-3 mb-4">

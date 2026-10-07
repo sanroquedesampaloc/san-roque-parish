@@ -9,6 +9,7 @@ import { AnnouncementCard } from "@/components/ui/AnnouncementCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { parseDateString } from "@/lib/dates";
 import { categoryLabels } from "@/lib/constants";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Parish News",
@@ -26,6 +27,7 @@ export default async function NewsPage() {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "News" }]} />
       <PageHero
         title="Parish News"
         subtitle="Announcements, updates, and stories from our parish community."

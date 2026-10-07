@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Support the Parish",
@@ -21,6 +22,7 @@ export default async function GivePage() {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Support the Parish" }]} />
       <PageHero
         title="Support the Parish"
         subtitle="Your generosity sustains our community of faith and service."

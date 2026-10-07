@@ -107,9 +107,18 @@ export const parishSettings = defineType({
     defineField({
       name: 'googleMapsUrl',
       title: 'Google Maps URL',
+      description: 'Link to the parish on Google Maps (used for "Get Directions")',
       type: 'url',
       group: 'social',
       validation: (rule) => rule.uri({scheme: ['http', 'https']}),
+    }),
+    defineField({
+      name: 'googleMapsEmbedUrl',
+      title: 'Google Maps Embed URL',
+      description: 'Embed URL from Google Maps (Share → Embed a map → copy the src attribute)',
+      type: 'url',
+      group: 'social',
+      validation: (rule) => rule.uri({scheme: ['https']}),
     }),
 
     // Other

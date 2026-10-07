@@ -50,7 +50,7 @@ export function SacramentsSection({
             <Link
               key={sac._id}
               href={`/mass-sacraments#${sac.slug}`}
-              className="group bg-white border border-border p-6 text-center hover:shadow-md transition-shadow hover:border-burgundy/20"
+              className="group bg-white border border-border p-6 text-center card-premium hover:border-burgundy/20"
             >
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-parchment flex items-center justify-center">
                 <svg

@@ -4,6 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { PrayerRequestForm } from "@/components/ui/PrayerRequestForm";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Prayer Request",
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 export default function PrayerRequestPage() {
   return (
     <>
+      <Breadcrumbs items={[{ name: "Prayer Request" }]} />
       <PageHero
         title="Prayer Request"
         subtitle="Share a prayer intention with the parish community."

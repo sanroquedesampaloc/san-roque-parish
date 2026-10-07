@@ -23,7 +23,7 @@ export function LatestHomilySection({
     <Section bg="default">
       <Container>
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 overflow-hidden border border-border bg-white">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 overflow-hidden border border-border bg-white shadow-premium">
             <div className="lg:col-span-2 bg-burgundy-dark text-white p-8 md:p-10 flex flex-col justify-between relative">
               <div
                 className="absolute inset-0 opacity-[0.04]"

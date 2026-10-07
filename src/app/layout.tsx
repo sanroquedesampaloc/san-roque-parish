@@ -3,6 +3,7 @@ import { EB_Garamond, Inter } from "next/font/google";
 import { SanityLive } from "@/sanity/lib/live";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { SITE_URL } from "@/lib/constants";
 import "./globals.css";
 
 const ebGaramond = EB_Garamond({
@@ -18,12 +19,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "San Roque de Sampaloc Parish",
     template: "%s | San Roque de Sampaloc Parish",
   },
   description:
     "Welcome to San Roque de Sampaloc Parish — a Catholic community of faith, worship, and service.",
+  openGraph: {
+    type: "website",
+    siteName: "San Roque de Sampaloc Parish",
+    locale: "en_PH",
+  },
+  twitter: {
+    card: "summary",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

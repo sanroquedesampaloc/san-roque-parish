@@ -15,6 +15,7 @@ export const PARISH_SETTINGS_QUERY = defineQuery(`
     youtubeUrl,
     messengerUrl,
     googleMapsUrl,
+    googleMapsEmbedUrl,
     givingInfo,
     footerInfo
   }

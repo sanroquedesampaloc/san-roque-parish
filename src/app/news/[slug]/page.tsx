@@ -10,6 +10,7 @@ import { Container } from "@/components/ui/Container";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { parseDateString } from "@/lib/dates";
 import { categoryLabels } from "@/lib/constants";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -47,6 +48,7 @@ export default async function NewsDetailPage({ params }: Props) {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "News", href: "/news" }, { name: announcement.title }]} />
       <PageHero
         title={announcement.title}
         backLink={{ href: "/news", label: "Back to News" }}

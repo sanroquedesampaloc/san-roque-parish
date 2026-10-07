@@ -9,7 +9,7 @@ type Ministry = {
 
 export function MinistryCard({ ministry }: { ministry: Ministry }) {
   return (
-    <article className="group bg-white border border-border p-6 md:p-8 text-center hover:shadow-md transition-shadow hover:border-burgundy/20">
+    <article className="group bg-white border border-border p-6 md:p-8 text-center card-premium hover:border-burgundy/20">
       <div className="w-14 h-14 mx-auto mb-5 bg-parchment rounded-full flex items-center justify-center">
         <svg
           className="w-6 h-6 text-burgundy"

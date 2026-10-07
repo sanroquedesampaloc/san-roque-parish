@@ -4,6 +4,15 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ScheduleDisplay } from "@/components/ui/ScheduleDisplay";
 import type { ScheduleEntry } from "../../../sanity.types";
 
+function isGoogleMapsEmbedUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.origin === "https://www.google.com" && parsed.pathname.startsWith("/maps/embed");
+  } catch {
+    return false;
+  }
+}
+
 export function VisitContactSection({
   settings,
 }: {
@@ -12,6 +21,7 @@ export function VisitContactSection({
     phone: string | null;
     email: string | null;
     googleMapsUrl: string | null;
+    googleMapsEmbedUrl: string | null;
     officeHours: Array<{ _key: string } & ScheduleEntry> | null;
   } | null;
 }) {
@@ -72,17 +82,33 @@ export function VisitContactSection({
               )}
             </div>
 
-            <div className="bg-parchment flex items-center justify-center p-8 md:p-10 min-h-[280px] md:min-h-0 relative">
-              <div className="text-center">
-                <svg className="w-12 h-12 text-charcoal-muted/30 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-                <p className="text-xs text-charcoal-muted uppercase tracking-wider">
-                  Map coming soon
-                </p>
+            {settings.googleMapsEmbedUrl && isGoogleMapsEmbedUrl(settings.googleMapsEmbedUrl) ? (
+              <div className="min-h-[280px] md:min-h-0">
+                <iframe
+                  src={settings.googleMapsEmbedUrl}
+                  title="San Roque de Sampaloc Parish location on Google Maps"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, minHeight: 280 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full"
+                />
               </div>
-            </div>
+            ) : (
+              <div className="bg-parchment flex items-center justify-center p-8 md:p-10 min-h-[280px] md:min-h-0 relative">
+                <div className="text-center">
+                  <svg className="w-12 h-12 text-charcoal-muted/30 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                  <p className="text-xs text-charcoal-muted uppercase tracking-wider">
+                    Map coming soon
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </Container>

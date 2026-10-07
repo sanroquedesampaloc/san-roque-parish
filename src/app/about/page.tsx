@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { ScheduleDisplay } from "@/components/ui/ScheduleDisplay";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "About",
@@ -25,6 +26,7 @@ export default async function AboutPage() {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "About" }]} />
       <PageHero
         title="About Our Parish"
         subtitle="A Catholic community of faith, worship, and service in Sampaloc, Manila."

@@ -671,6 +671,13 @@
         },
         "optional": true
       },
+      "googleMapsEmbedUrl": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "givingInfo": {
         "type": "objectAttribute",
         "value": {

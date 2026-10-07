@@ -8,6 +8,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { parseDateString } from "@/lib/dates";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -60,6 +61,7 @@ export default async function HomilyDetailPage({ params }: Props) {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Homilies", href: "/homilies" }, { name: homily.title }]} />
       <PageHero
         title={homily.title}
         backLink={{ href: "/homilies", label: "Back to Homilies" }}

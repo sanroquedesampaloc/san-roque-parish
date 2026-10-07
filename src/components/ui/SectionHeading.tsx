@@ -18,7 +18,7 @@ export function SectionHeading({
       {eyebrow && (
         <p
           className={`text-xs font-semibold uppercase tracking-[0.2em] mb-3 ${
-            light ? "text-gold-light" : "text-gold-dark"
+            light ? "text-gold-light" : "text-gold-shimmer"
           }`}
         >
           {eyebrow}
@@ -43,9 +43,14 @@ export function SectionHeading({
         </p>
       )}
       <div
-        className={`mt-5 h-px w-12 ${
+        className={`mt-5 h-px w-12 accent-line-animated ${
           centered ? "mx-auto" : ""
-        } ${light ? "bg-gold-light/60" : "bg-gold"}`}
+        }`}
+        style={{
+          background: light
+            ? "linear-gradient(90deg, transparent, var(--color-gold-light), transparent)"
+            : "linear-gradient(90deg, var(--color-gold-dark), var(--color-gold), var(--color-gold-dark))",
+        }}
         aria-hidden="true"
       />
     </div>

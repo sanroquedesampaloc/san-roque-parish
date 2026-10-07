@@ -6,6 +6,17 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ScheduleDisplay } from "@/components/ui/ScheduleDisplay";
+import { ContactForm } from "@/components/ui/ContactForm";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+
+function isGoogleMapsEmbedUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.origin === "https://www.google.com" && parsed.pathname.startsWith("/maps/embed");
+  } catch {
+    return false;
+  }
+}
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -25,6 +36,7 @@ export default async function ContactPage() {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Contact" }]} />
       <PageHero
         title="Contact Us"
         subtitle="We welcome your questions, prayer intentions, and visits. Reach out to us anytime."
@@ -103,42 +115,58 @@ export default async function ContactPage() {
               </div>
 
               {/* Map / directions column */}
-              <div className="bg-parchment flex flex-col items-center justify-center p-8 md:p-10 min-h-[280px] md:min-h-0 border-t md:border-t-0 md:border-l border-border">
-                <svg
-                  className="w-12 h-12 text-charcoal-muted/30 mb-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+              {settings?.googleMapsEmbedUrl && isGoogleMapsEmbedUrl(settings.googleMapsEmbedUrl) ? (
+                <div className="min-h-[280px] md:min-h-0 border-t md:border-t-0 md:border-l border-border">
+                  <iframe
+                    src={settings.googleMapsEmbedUrl}
+                    title="San Roque de Sampaloc Parish location on Google Maps"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, minHeight: 280 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
                   />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
-                  />
-                </svg>
-                {settings?.googleMapsUrl ? (
-                  <a
-                    href={settings.googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-7 py-3 text-sm font-medium tracking-wide uppercase transition-colors border border-burgundy text-burgundy hover:bg-burgundy hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy"
+                </div>
+              ) : (
+                <div className="bg-parchment flex flex-col items-center justify-center p-8 md:p-10 min-h-[280px] md:min-h-0 border-t md:border-t-0 md:border-l border-border">
+                  <svg
+                    className="w-12 h-12 text-charcoal-muted/30 mb-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
                   >
-                    Get Directions
-                  </a>
-                ) : (
-                  <p className="text-xs text-charcoal-muted uppercase tracking-wider">
-                    Directions coming soon
-                  </p>
-                )}
-              </div>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                    />
+                  </svg>
+                  {settings?.googleMapsUrl ? (
+                    <a
+                      href={settings.googleMapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center px-7 py-3 text-sm font-medium tracking-wide uppercase transition-colors border border-burgundy text-burgundy hover:bg-burgundy hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-burgundy"
+                    >
+                      Get Directions
+                    </a>
+                  ) : (
+                    <p className="text-xs text-charcoal-muted uppercase tracking-wider">
+                      Directions coming soon
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </Container>
@@ -234,46 +262,15 @@ export default async function ContactPage() {
         </Section>
       )}
 
-      {/* Contact Form Placeholder */}
-      <Section bg={hasSocials ? "default" : "warm"} spacing="compact">
+      {/* Contact Form */}
+      <Section bg={hasSocials ? "default" : "warm"}>
         <Container>
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="w-px h-8 bg-gold/40 mx-auto mb-6" aria-hidden="true" />
-            <h2 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-gold-dark mb-4">
-              Contact Form
-            </h2>
-            <p className="text-lg md:text-xl font-serif text-charcoal leading-relaxed">
-              An online contact form is coming soon.
-            </p>
-            <p className="mt-3 text-sm text-charcoal-light leading-relaxed">
-              In the meantime, please reach us by{" "}
-              {settings?.phone ? (
-                <a
-                  href={`tel:${settings.phone}`}
-                  className="text-burgundy hover:text-burgundy-light transition-colors"
-                >
-                  phone
-                </a>
-              ) : (
-                "phone"
-              )}
-              {settings?.phone && settings?.email ? " or " : ""}
-              {settings?.email ? (
-                <a
-                  href={`mailto:${settings.email}`}
-                  className="text-burgundy hover:text-burgundy-light transition-colors"
-                >
-                  email
-                </a>
-              ) : settings?.phone ? (
-                ""
-              ) : (
-                "email"
-              )}
-              , or visit the parish office during office hours.
-            </p>
-            <div className="w-px h-8 bg-gold/40 mx-auto mt-6" aria-hidden="true" />
-          </div>
+          <SectionHeading
+            eyebrow="Send a Message"
+            title="Contact Form"
+            subtitle="Fill out the form below and we will get back to you as soon as possible."
+          />
+          <ContactForm />
         </Container>
       </Section>
     </>

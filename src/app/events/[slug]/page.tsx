@@ -10,6 +10,7 @@ import { Container } from "@/components/ui/Container";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { parseDateString } from "@/lib/dates";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -70,6 +71,7 @@ export default async function EventDetailPage({ params }: Props) {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Events", href: "/events" }, { name: event.title }]} />
       <PageHero
         title={event.title}
         backLink={{ href: "/events", label: "Back to Events" }}

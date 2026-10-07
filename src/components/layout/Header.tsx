@@ -15,7 +15,11 @@ const navLinks = [
 export function Header() {
   return (
     <header className="sticky top-0 z-50">
-      <div className="h-0.5 bg-gold" aria-hidden="true" />
+      <div
+        className="h-0.5"
+        style={{ background: "linear-gradient(90deg, var(--color-gold-dark), var(--color-gold), var(--color-gold-light), var(--color-gold), var(--color-gold-dark))" }}
+        aria-hidden="true"
+      />
       <div className="bg-white/95 backdrop-blur-sm border-b border-border">
         <div className="container-parish flex items-center justify-between h-16 md:h-[4.5rem]">
           <Link href="/" className="flex items-center gap-3 group">
@@ -44,6 +48,12 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/give"
+              className="ml-3 inline-flex items-center justify-center px-5 py-2.5 text-[13px] font-semibold uppercase tracking-wider bg-gold text-charcoal hover:bg-gold-light transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              Donate
+            </Link>
           </nav>
 
           <MobileMenuTrigger links={navLinks} />

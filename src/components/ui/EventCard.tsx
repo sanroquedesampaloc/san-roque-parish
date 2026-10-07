@@ -15,7 +15,7 @@ export function EventCard({ event }: { event: Event }) {
   const startDate = parseDateString(event.startDate);
 
   return (
-    <article className="bg-white border border-border overflow-hidden hover:shadow-md transition-shadow group">
+    <article className="bg-white border border-border overflow-hidden card-premium group">
       <div className="flex">
         <div className="flex-shrink-0 w-20 md:w-24 bg-burgundy-dark text-white flex flex-col items-center justify-center p-4">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-light">

@@ -9,6 +9,7 @@ import { ScheduleDisplay } from "@/components/ui/ScheduleDisplay";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { getFileUrl } from "@/sanity/lib/file";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Mass & Sacraments",
@@ -29,6 +30,7 @@ export default async function MassSacramentsPage() {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Mass & Sacraments" }]} />
       <PageHero
         title="Mass & Sacraments"
         subtitle="Join us in worship and encounter the grace of the sacraments."

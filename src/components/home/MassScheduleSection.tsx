@@ -18,7 +18,7 @@ function ScheduleCard({
 
   return (
     <div
-      className={`rounded-sm p-6 md:p-8 ${
+      className={`rounded-sm p-6 md:p-8 card-premium ${
         accent
           ? "bg-burgundy text-white"
           : "bg-white border border-border"

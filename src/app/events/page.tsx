@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { EventCard } from "@/components/ui/EventCard";
 import { EmptyState } from "@/components/ui/EmptyState";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Parish Events",
@@ -25,6 +26,7 @@ export default async function EventsPage() {
 
   return (
     <>
+      <Breadcrumbs items={[{ name: "Events" }]} />
       <PageHero
         title="Parish Events"
         subtitle="Gatherings, celebrations, and community activities."

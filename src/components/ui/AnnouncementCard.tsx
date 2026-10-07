@@ -17,7 +17,7 @@ export function AnnouncementCard({
   announcement: Announcement;
 }) {
   return (
-    <article className="bg-white border border-border p-6 hover:shadow-md transition-shadow group">
+    <article className="bg-white border border-border p-6 card-premium group">
       <div className="flex items-center gap-3 mb-3">
         <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-burgundy">
           {categoryLabels[announcement.category] ?? announcement.category}
