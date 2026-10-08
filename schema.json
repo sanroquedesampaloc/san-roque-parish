@@ -1498,6 +1498,36 @@
         },
         "optional": true
       },
+      "pricingInfo": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "columbariumInfoRow"
+        },
+        "optional": true
+      },
+      "reservationTerms": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "columbariumInfoRow"
+            }
+          }
+        },
+        "optional": true
+      },
       "inquirySteps": {
         "type": "objectAttribute",
         "value": {
@@ -1553,6 +1583,16 @@
         "type": "objectAttribute",
         "value": {
           "type": "string"
+        },
+        "optional": true
+      },
+      "contactNumbers": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
         },
         "optional": true
       },
@@ -1652,6 +1692,43 @@
           "type": "string"
         },
         "optional": true
+      }
+    }
+  },
+  {
+    "name": "columbariumInfoRow",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "columbariumInfoRow"
+          }
+        },
+        "label": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
+        "value": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
+        "note": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
       }
     }
   },

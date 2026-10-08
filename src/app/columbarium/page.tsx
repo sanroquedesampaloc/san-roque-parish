@@ -39,6 +39,10 @@ export default async function ColumbariumPage() {
   );
   const nicheOptions = columbarium?.nicheOptions ?? [];
   const hasNicheOptions = nicheOptions.length > 0;
+  const hasPricingInfo = Boolean(columbarium?.pricingInfo);
+  const reservationTerms = columbarium?.reservationTerms ?? [];
+  const hasReservationTerms = reservationTerms.length > 0;
+  const hasPricingSection = hasPricingInfo || hasReservationTerms;
   const inquirySteps = columbarium?.inquirySteps ?? [];
   const hasVisitingHours = (columbarium?.visitingHours?.length ?? 0) > 0;
   const hasMap = Boolean(
@@ -106,7 +110,7 @@ export default async function ColumbariumPage() {
       {hasInformation && (
         <Section bg="warm">
           <Container>
-            <SectionHeading eyebrow="Columbarium" title="Visiting &amp; General Information" centered={false} />
+            <SectionHeading eyebrow="Columbarium" title="Columbarium Information" centered={false} />
             <div className="max-w-3xl mx-auto space-y-8">
               {columbarium?.locationDescription && (
                 <div>
@@ -174,7 +178,7 @@ export default async function ColumbariumPage() {
                           {option.type && (
                             <div className="flex items-baseline gap-2">
                               <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark">
-                                Type
+                                Capacity
                               </span>
                               <span className="text-sm text-charcoal">{option.type}</span>
                             </div>
@@ -211,6 +215,64 @@ export default async function ColumbariumPage() {
             </Container>
           </Section>
         </ScrollReveal>
+      )}
+
+      {hasPricingSection && <SectionDivider bg="white" />}
+
+      {/* Pricing & Reservation — dignified informational presentation,
+          never a price tag or table. */}
+      {hasPricingSection && (
+        <Section bg="white">
+          <Container>
+            <SectionHeading eyebrow="Information" title="Pricing &amp; Reservation" />
+            <div className="max-w-2xl mx-auto">
+              {hasPricingInfo && (
+                <div className="text-center mb-10">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark mb-2">
+                    {columbarium!.pricingInfo!.label}
+                  </p>
+                  <p className="text-3xl md:text-4xl font-serif font-semibold text-charcoal">
+                    {columbarium!.pricingInfo!.value}
+                  </p>
+                  {columbarium!.pricingInfo!.note && (
+                    <p className="mt-2 text-sm text-charcoal-light">
+                      {columbarium!.pricingInfo!.note}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {hasPricingInfo && hasReservationTerms && (
+                <div className="h-px w-12 mx-auto bg-gold/60 mb-10" aria-hidden="true" />
+              )}
+
+              {hasReservationTerms && (
+                <div>
+                  <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark mb-6 text-center">
+                    Reservation &amp; Payment Information
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+                    {reservationTerms.map((row) => (
+                      <div key={row._key}>
+                        <p className="text-xs font-semibold uppercase tracking-wide text-charcoal-muted mb-1">
+                          {row.label}
+                        </p>
+                        <p className="text-xl font-serif font-semibold text-charcoal">
+                          {row.value}
+                        </p>
+                        {row.note && (
+                          <p className="mt-1.5 text-xs text-charcoal-light leading-relaxed">
+                            {row.note}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </Container>
+        </Section>
       )}
 
       <SectionDivider bg="ivory-warm" />
@@ -428,6 +490,24 @@ export default async function ColumbariumPage() {
                     {settings.email}
                   </a>
                 )}
+              </div>
+            )}
+            {columbarium?.contactNumbers && columbarium.contactNumbers.length > 0 && (
+              <div className="mt-4">
+                <p className="text-[11px] uppercase tracking-wide text-charcoal-muted mb-2">
+                  Columbarium Contact Numbers
+                </p>
+                <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm">
+                  {columbarium.contactNumbers.map((number) => (
+                    <a
+                      key={number}
+                      href={`tel:${number.replace(/[^0-9+]/g, "")}`}
+                      className="text-burgundy hover:text-burgundy-light transition-colors"
+                    >
+                      {number}
+                    </a>
+                  ))}
+                </div>
               </div>
             )}
             <div className="mt-8 flex flex-wrap justify-center gap-4">

@@ -11,10 +11,13 @@ export const COLUMBARIUM_PAGE_QUERY = defineQuery(`
     generalInformation,
     availabilityNote,
     nicheOptions,
+    pricingInfo,
+    reservationTerms,
     inquirySteps,
     inquiryNote,
     visitingHours,
     accessibilityNotes,
+    contactNumbers,
     gallery,
     faqs,
     additionalNotes

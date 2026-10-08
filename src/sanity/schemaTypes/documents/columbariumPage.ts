@@ -10,6 +10,7 @@ export const columbariumPage = defineType({
     {name: 'hero', title: 'Hero', default: true},
     {name: 'content', title: 'Information'},
     {name: 'niches', title: 'Niche Options'},
+    {name: 'pricing', title: 'Pricing & Reservation'},
     {name: 'inquiry', title: 'Inquiry'},
     {name: 'visiting', title: 'Visiting'},
     {name: 'gallery', title: 'Gallery'},
@@ -96,6 +97,25 @@ export const columbariumPage = defineType({
       group: 'niches',
     }),
 
+    // Pricing & Reservation
+    defineField({
+      name: 'pricingInfo',
+      title: 'Starting Price',
+      description:
+        'A single confirmed figure, e.g. label "Starting Price", value "₱100,000", note "Price varies depending on niche size." Leave entirely unset until the parish has confirmed current pricing.',
+      type: 'columbariumInfoRow',
+      group: 'pricing',
+    }),
+    defineField({
+      name: 'reservationTerms',
+      title: 'Reservation & Payment Terms',
+      description:
+        'Confirmed reservation/payment terms only, e.g. Reservation Fee, Down Payment, Remaining Balance. Leave empty to hide this section rather than guess at terms.',
+      type: 'array',
+      of: [defineArrayMember({type: 'columbariumInfoRow'})],
+      group: 'pricing',
+    }),
+
     // Inquiry
     defineField({
       name: 'inquirySteps',
@@ -131,6 +151,15 @@ export const columbariumPage = defineType({
       description: 'e.g. step-free access, parking guidance. Optional.',
       type: 'text',
       rows: 2,
+      group: 'visiting',
+    }),
+    defineField({
+      name: 'contactNumbers',
+      title: 'Columbarium Contact Numbers',
+      description:
+        'Phone numbers specific to Columbarium inquiries, if different from the main parish office number in Parish Settings. This does not replace or affect the parish-wide phone number.',
+      type: 'array',
+      of: [defineArrayMember({type: 'string'})],
       group: 'visiting',
     }),
 

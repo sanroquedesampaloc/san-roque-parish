@@ -5,6 +5,7 @@ import {scheduleEntry} from './objects/scheduleEntry'
 import {columbariumNicheOption} from './objects/columbariumNicheOption'
 import {columbariumInquiryStep} from './objects/columbariumInquiryStep'
 import {columbariumFaq} from './objects/columbariumFaq'
+import {columbariumInfoRow} from './objects/columbariumInfoRow'
 
 import {announcement} from './documents/announcement'
 import {clergy} from './documents/clergy'
@@ -23,6 +24,7 @@ export const schema: {types: SchemaTypeDefinition[]} = {
     columbariumNicheOption,
     columbariumInquiryStep,
     columbariumFaq,
+    columbariumInfoRow,
 
     announcement,
     clergy,

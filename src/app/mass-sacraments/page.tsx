@@ -233,9 +233,39 @@ export default async function MassSacramentsPage() {
           </Container>
         </Section>
           </ScrollReveal>
-          <SectionDivider bg="ivory-warm" />
         </>
       )}
+
+      <SectionDivider bg="white" />
+
+      {/* Columbarium — a contextual pointer to a related but distinct page;
+          not presented as a sacrament. */}
+      <ScrollReveal>
+        <Section bg="white" spacing="compact">
+          <Container>
+            <div className="max-w-2xl mx-auto text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-shimmer mb-3">
+                Columbarium
+              </p>
+              <h2 className="text-2xl md:text-3xl font-semibold text-charcoal leading-tight">
+                A Sacred Place of Remembrance
+              </h2>
+              <div className="mt-5 h-px w-12 mx-auto bg-gold/60" aria-hidden="true" />
+              <p className="mt-5 text-charcoal-light leading-relaxed">
+                Learn more about the parish Columbarium, visiting information, and
+                how to make an inquiry.
+              </p>
+              <div className="mt-8">
+                <ButtonLink href="/columbarium" variant="outline">
+                  Learn About the Columbarium
+                </ButtonLink>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      </ScrollReveal>
+
+      <SectionDivider bg="ivory-warm" />
 
       {/* Parish Office */}
       <ScrollReveal>
