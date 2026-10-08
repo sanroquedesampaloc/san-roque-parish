@@ -5,6 +5,7 @@ import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
 
 const quickLinks = [
   { href: "/mass-sacraments", label: "Mass & Sacraments" },
+  { href: "/columbarium", label: "Columbarium" },
   { href: "/ministries", label: "Ministries" },
   { href: "/news", label: "News" },
   { href: "/events", label: "Events" },

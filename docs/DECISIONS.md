@@ -59,3 +59,9 @@ Contact messages and prayer requests are emailed directly to parish staff and no
 Use Cloudflare Turnstile for form spam protection instead of Google reCAPTCHA.
 
 **Rationale**: Privacy-focused (no tracking cookies), free, simpler integration, and does not require users to solve visual challenges. Server-side verification via a single POST request to Cloudflare's API.
+
+## ADR-011: Columbarium Not Added to the Desktop Top-Level Nav
+
+The `/columbarium` page is linked from the mobile nav drawer and the footer's Quick Links, but not added as a 9th item in the desktop header bar.
+
+**Rationale**: The desktop nav (8 items + Donate button) is already near its practical width limit at the `lg:` (1024px) breakpoint where it first appears. A 9th item risks wrapping/cramping on smaller laptop screens. The mobile drawer has no such constraint (vertical, scrollable list), so Columbarium is fully reachable there and via the footer on every screen size without redesigning the primary nav. Revisit if the desktop nav is ever restructured (e.g., a "More" menu).

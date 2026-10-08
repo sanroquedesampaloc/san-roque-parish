@@ -19,6 +19,14 @@ export const structure: StructureResolver = (S) =>
                     .documentId('parishSettings')
                     .title('Parish Settings'),
                 ),
+              S.listItem()
+                .title('Columbarium Page')
+                .child(
+                  S.document()
+                    .schemaType('columbariumPage')
+                    .documentId('columbariumPage')
+                    .title('Columbarium Page'),
+                ),
               S.documentTypeListItem('clergy').title('Clergy'),
               S.documentTypeListItem('ministry').title('Ministries'),
               S.documentTypeListItem('sacrament').title('Sacraments'),

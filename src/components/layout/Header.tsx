@@ -12,6 +12,16 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+// The mobile drawer has room for one more item than the desktop bar, which
+// is already near its practical width limit at the 1024px breakpoint where
+// it first appears (see docs/DECISIONS.md). Columbarium is reachable here
+// and from the footer's Quick Links instead of forcing a 9th desktop item.
+const mobileNavLinks = [
+  ...navLinks.slice(0, 3),
+  { href: "/columbarium", label: "Columbarium" },
+  ...navLinks.slice(3),
+];
+
 export function Header() {
   return (
     <header className="sticky top-0 z-50">
@@ -56,7 +66,7 @@ export function Header() {
             </Link>
           </nav>
 
-          <MobileMenuTrigger links={navLinks} />
+          <MobileMenuTrigger links={mobileNavLinks} />
         </div>
       </div>
     </header>

@@ -28,6 +28,15 @@ test.describe("Footer navigation", () => {
       footer.getByRole("link", { name: /events/i })
     ).toBeVisible();
   });
+
+  test("footer links to the Columbarium page", async ({ page }) => {
+    await page.goto("/");
+    const footer = page.locator("footer");
+    const link = footer.getByRole("link", { name: /columbarium/i });
+    await expect(link).toBeVisible();
+    await link.click();
+    await expect(page).toHaveURL(/\/columbarium/);
+  });
 });
 
 test.describe("Homepage CTAs", () => {
@@ -67,6 +76,15 @@ test.describe("Mobile navigation", () => {
     await expect(page).toHaveURL(/\/about/);
   });
 
+  test("mobile menu links to the Columbarium page", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /open menu/i }).click();
+
+    const dialog = page.getByRole("dialog", { name: /mobile/i });
+    await dialog.getByRole("link", { name: /columbarium/i }).click();
+    await expect(page).toHaveURL(/\/columbarium/);
+  });
+
   test("escape key closes mobile menu", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("button", { name: /open menu/i }).click();
@@ -92,6 +110,7 @@ test.describe("Mobile navigation", () => {
       "Home",
       "About",
       "Sacraments",
+      "Columbarium",
       "Ministries",
       "News",
       "Events",

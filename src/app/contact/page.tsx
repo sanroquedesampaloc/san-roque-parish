@@ -11,15 +11,7 @@ import { ContactForm } from "@/components/ui/ContactForm";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionDivider } from "@/components/ui/SectionDivider";
-
-function isGoogleMapsEmbedUrl(url: string): boolean {
-  try {
-    const parsed = new URL(url);
-    return parsed.origin === "https://www.google.com" && parsed.pathname.startsWith("/maps/embed");
-  } catch {
-    return false;
-  }
-}
+import { isGoogleMapsEmbedUrl } from "@/lib/googleMaps";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -27,8 +19,15 @@ export const metadata: Metadata = {
     "Get in touch with San Roque de Sampaloc Parish — find our address, phone, email, office hours, and directions.",
 };
 
-export default async function ContactPage() {
-  const { data: settings } = await sanityFetch({ query: PARISH_SETTINGS_QUERY });
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ subject?: string }>;
+}) {
+  const [{ data: settings }, { subject }] = await Promise.all([
+    sanityFetch({ query: PARISH_SETTINGS_QUERY }),
+    searchParams,
+  ]);
 
   const hasContactDetails =
     settings?.address || settings?.phone || settings?.email;
@@ -282,7 +281,7 @@ export default async function ContactPage() {
             title="Contact Form"
             subtitle="Fill out the form below and we will get back to you as soon as possible."
           />
-          <ContactForm />
+          <ContactForm initialSubject={subject} />
 
           {/* Privacy guidance */}
           <div className="max-w-2xl mx-auto mt-8 pt-6 border-t border-border-light">

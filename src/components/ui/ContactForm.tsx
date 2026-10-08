@@ -21,7 +21,11 @@ function FieldError({ id, errors }: { id: string; errors?: string[] }) {
   );
 }
 
-export function ContactForm() {
+export function ContactForm({
+  initialSubject,
+}: {
+  initialSubject?: string;
+} = {}) {
   const [state, formAction, pending] = useActionState(
     submitContactForm,
     contactInitialState
@@ -147,6 +151,7 @@ export function ContactForm() {
               type="text"
               id="contact-subject"
               name="subject"
+              defaultValue={initialSubject}
               required
               aria-required="true"
               aria-describedby={

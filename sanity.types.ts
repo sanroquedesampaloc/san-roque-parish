@@ -237,6 +237,61 @@ export type Event = {
   status: "upcoming" | "ongoing" | "completed" | "cancelled";
 };
 
+export type ColumbariumPage = {
+  _id: string;
+  _type: "columbariumPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  eyebrow?: string;
+  title?: string;
+  heroSubtitle?: string;
+  introduction?: BlockContent;
+  introductionImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  locationDescription?: string;
+  generalInformation?: BlockContent;
+  availabilityNote?: string;
+  nicheOptions?: Array<
+    {
+      _key: string;
+    } & ColumbariumNicheOption
+  >;
+  inquirySteps?: Array<
+    {
+      _key: string;
+    } & ColumbariumInquiryStep
+  >;
+  inquiryNote?: string;
+  visitingHours?: Array<
+    {
+      _key: string;
+    } & ScheduleEntry
+  >;
+  accessibilityNotes?: string;
+  gallery?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+    _key: string;
+  }>;
+  faqs?: Array<
+    {
+      _key: string;
+    } & ColumbariumFaq
+  >;
+  additionalNotes?: string;
+};
+
 export type Clergy = {
   _id: string;
   _type: "clergy";
@@ -279,6 +334,36 @@ export type Announcement = {
   publishedAt: string;
   featured?: boolean;
   status?: "active" | "archived";
+};
+
+export type ColumbariumFaq = {
+  _type: "columbariumFaq";
+  question: string;
+  answer: BlockContent;
+};
+
+export type ColumbariumInquiryStep = {
+  _type: "columbariumInquiryStep";
+  title: string;
+  description?: string;
+};
+
+export type ColumbariumNicheOption = {
+  _type: "columbariumNicheOption";
+  name: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  type?: string;
+  availabilityNote?: string;
+  priceNote?: string;
+  notes?: string;
 };
 
 export type ScheduleEntry = {
@@ -398,8 +483,12 @@ export type AllSanitySchemaTypes =
   | Homily
   | Faq
   | Event
+  | ColumbariumPage
   | Clergy
   | Announcement
+  | ColumbariumFaq
+  | ColumbariumInquiryStep
+  | ColumbariumNicheOption
   | ScheduleEntry
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -473,6 +562,133 @@ export type ANNOUNCEMENT_BY_SLUG_QUERY_RESULT = {
   featured: boolean | null;
   status: "active" | "archived" | null;
 } | null;
+
+// Source: src/sanity/lib/queries/columbarium.ts
+// Variable: COLUMBARIUM_PAGE_QUERY
+// Query: *[_id == "columbariumPage"][0]{    eyebrow,    title,    heroSubtitle,    introduction,    introductionImage,    locationDescription,    generalInformation,    availabilityNote,    nicheOptions,    inquirySteps,    inquiryNote,    visitingHours,    accessibilityNotes,    gallery,    faqs,    additionalNotes  }
+export type COLUMBARIUM_PAGE_QUERY_RESULT =
+  | {
+      eyebrow: null;
+      title: null;
+      heroSubtitle: null;
+      introduction: null;
+      introductionImage: null;
+      locationDescription: null;
+      generalInformation: null;
+      availabilityNote: null;
+      nicheOptions: null;
+      inquirySteps: null;
+      inquiryNote: null;
+      visitingHours: null;
+      accessibilityNotes: null;
+      gallery: null;
+      faqs: null;
+      additionalNotes: null;
+    }
+  | {
+      eyebrow: null;
+      title: string;
+      heroSubtitle: null;
+      introduction: null;
+      introductionImage: null;
+      locationDescription: null;
+      generalInformation: null;
+      availabilityNote: null;
+      nicheOptions: null;
+      inquirySteps: null;
+      inquiryNote: null;
+      visitingHours: null;
+      accessibilityNotes: null;
+      gallery: null;
+      faqs: null;
+      additionalNotes: null;
+    }
+  | {
+      eyebrow: null;
+      title: string | null;
+      heroSubtitle: null;
+      introduction: null;
+      introductionImage: null;
+      locationDescription: null;
+      generalInformation: null;
+      availabilityNote: null;
+      nicheOptions: null;
+      inquirySteps: null;
+      inquiryNote: null;
+      visitingHours: null;
+      accessibilityNotes: null;
+      gallery: null;
+      faqs: null;
+      additionalNotes: null;
+    }
+  | {
+      eyebrow: null;
+      title: null;
+      heroSubtitle: null;
+      introduction: BlockContent | null;
+      introductionImage: null;
+      locationDescription: null;
+      generalInformation: null;
+      availabilityNote: null;
+      nicheOptions: null;
+      inquirySteps: null;
+      inquiryNote: null;
+      visitingHours: null;
+      accessibilityNotes: null;
+      gallery: null;
+      faqs: null;
+      additionalNotes: null;
+    }
+  | {
+      eyebrow: string | null;
+      title: string | null;
+      heroSubtitle: string | null;
+      introduction: BlockContent | null;
+      introductionImage: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
+      locationDescription: string | null;
+      generalInformation: BlockContent | null;
+      availabilityNote: string | null;
+      nicheOptions: Array<
+        {
+          _key: string;
+        } & ColumbariumNicheOption
+      > | null;
+      inquirySteps: Array<
+        {
+          _key: string;
+        } & ColumbariumInquiryStep
+      > | null;
+      inquiryNote: string | null;
+      visitingHours: Array<
+        {
+          _key: string;
+        } & ScheduleEntry
+      > | null;
+      accessibilityNotes: string | null;
+      gallery: Array<{
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "image";
+        _key: string;
+      }> | null;
+      faqs: Array<
+        {
+          _key: string;
+        } & ColumbariumFaq
+      > | null;
+      additionalNotes: string | null;
+    }
+  | null;
 
 // Source: src/sanity/lib/queries/events.ts
 // Variable: UPCOMING_EVENTS_QUERY
@@ -760,6 +976,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "announcement" && featured == true && status == "active"]\n    | order(publishedAt desc) [0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    category,\n    publishedAt\n  }\n': FEATURED_ANNOUNCEMENT_QUERY_RESULT;
     '\n  *[_type == "announcement" && status == "active"]\n    | order(publishedAt desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    category,\n    publishedAt,\n    featured\n  }\n': ANNOUNCEMENTS_LIST_QUERY_RESULT;
     '\n  *[_type == "announcement" && slug.current == $slug && status == "active"][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    body,\n    category,\n    publishedAt,\n    featured,\n    status\n  }\n': ANNOUNCEMENT_BY_SLUG_QUERY_RESULT;
+    '\n  *[_id == "columbariumPage"][0]{\n    eyebrow,\n    title,\n    heroSubtitle,\n    introduction,\n    introductionImage,\n    locationDescription,\n    generalInformation,\n    availabilityNote,\n    nicheOptions,\n    inquirySteps,\n    inquiryNote,\n    visitingHours,\n    accessibilityNotes,\n    gallery,\n    faqs,\n    additionalNotes\n  }\n': COLUMBARIUM_PAGE_QUERY_RESULT;
     '\n  *[_type == "event" && status in ["upcoming", "ongoing"]]\n    | order(startDate asc) {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    featured,\n    status\n  }\n': UPCOMING_EVENTS_QUERY_RESULT;
     '\n  *[_type == "event" && status != "cancelled"] | order(startDate desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    featured,\n    status\n  }\n': EVENTS_LIST_QUERY_RESULT;
     '\n  *[_type == "event" && slug.current == $slug && status != "cancelled"][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    description,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    registrationUrl,\n    featured,\n    status\n  }\n': EVENT_BY_SLUG_QUERY_RESULT;
