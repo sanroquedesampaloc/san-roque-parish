@@ -68,6 +68,7 @@ export default async function MinistriesPage() {
                                 alt={ministry.image!.alt ?? ministry.name}
                                 width={480}
                                 height={320}
+                                sizes="(min-width: 768px) 360px, 100vw"
                                 className="w-full h-auto"
                               />
                             </div>

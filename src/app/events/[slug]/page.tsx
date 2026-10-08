@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: event.title,
     description: `${event.title} — ${event.startDate}${event.location ? ` at ${event.location}` : ""}`,
+    alternates: { canonical: `/events/${slug}` },
   };
 }
 
@@ -90,6 +91,7 @@ export default async function EventDetailPage({ params }: Props) {
                       alt={event.poster!.alt ?? event.title}
                       width={800}
                       height={450}
+                      sizes="(min-width: 1024px) 600px, 100vw"
                       className="w-full h-auto"
                       priority
                     />

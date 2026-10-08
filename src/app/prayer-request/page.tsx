@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
@@ -30,8 +31,15 @@ export default function PrayerRequestPage() {
           {/* Privacy guidance */}
           <div className="max-w-2xl mx-auto mt-8 pt-6 border-t border-border-light">
             <p className="text-xs text-charcoal-muted leading-relaxed">
-              Please avoid including sensitive personal information that is not
-              necessary for your prayer request.
+              Your intention is read only by parish staff who help carry these
+              requests in prayer. Please share only what feels comfortable —
+              there&rsquo;s no need to include sensitive personal details
+              (such as medical or financial information) for us to pray for
+              you. See our{" "}
+              <Link href="/privacy" className="underline hover:text-charcoal-light">
+                Privacy Notice
+              </Link>{" "}
+              for how we handle what you share.
             </p>
           </div>
         </Container>

@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: homily.title,
     description: homily.description ?? `Homily: ${homily.title}`,
+    alternates: { canonical: `/homilies/${slug}` },
   };
 }
 
@@ -158,6 +159,7 @@ export default async function HomilyDetailPage({ params }: Props) {
                   alt={homily.thumbnail!.alt ?? homily.title}
                   width={960}
                   height={540}
+                  sizes="(min-width: 896px) 896px, 100vw"
                   className="w-full h-auto"
                   priority
                 />

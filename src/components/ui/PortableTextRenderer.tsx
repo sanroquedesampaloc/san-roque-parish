@@ -21,6 +21,7 @@ const components: PortableTextComponents = {
             alt={alt}
             width={900}
             height={560}
+            sizes="(min-width: 1024px) 896px, (min-width: 768px) 768px, 100vw"
             className="w-full h-auto"
           />
           {caption && (

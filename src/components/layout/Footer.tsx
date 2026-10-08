@@ -129,7 +129,12 @@ export async function Footer() {
             &copy; {new Date().getFullYear()}{" "}
             {settings?.parishName ?? "San Roque de Sampaloc Parish"}
           </p>
-          <p>A Catholic Parish in the Archdiocese of Manila</p>
+          <p className="flex items-center gap-4">
+            <span>A Catholic Parish in the Archdiocese of Manila</span>
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              Privacy
+            </Link>
+          </p>
         </div>
       </div>
     </footer>

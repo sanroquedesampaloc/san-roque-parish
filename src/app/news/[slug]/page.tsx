@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: announcement.title,
     description: announcement.excerpt ?? undefined,
+    alternates: { canonical: `/news/${slug}` },
   };
 }
 
@@ -81,6 +82,7 @@ export default async function NewsDetailPage({ params }: Props) {
                   alt={announcement.featuredImage!.alt ?? announcement.title}
                   width={960}
                   height={480}
+                  sizes="(min-width: 768px) 768px, 100vw"
                   className="w-full h-auto"
                   priority
                 />

@@ -110,6 +110,7 @@ export default async function AboutPage() {
                             alt={member.photo!.alt ?? member.name}
                             width={400}
                             height={500}
+                            sizes="(min-width: 768px) 300px, 100vw"
                             className="w-full h-full object-cover"
                           />
                         </div>

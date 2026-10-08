@@ -44,6 +44,17 @@ export default async function HomePage() {
     getPlaceDetails(),
   ]);
 
+  // Each divider below sits between two sections; several of those sections
+  // hide themselves entirely when there's no content yet. Gating the divider
+  // on the section it introduces avoids two decorative dividers rendering
+  // back-to-back with nothing between them (see docs/LAUNCH-CHECKLIST.md).
+  const hasFeaturedAnnouncement = Boolean(featuredAnnouncement ?? announcements[0]);
+  const hasEvents = events.length > 0;
+  const hasSacraments = sacraments.length > 0;
+  const hasHomily = Boolean(homily);
+  const hasMinistries = ministries.length > 0;
+  const hasFaqs = faqs.length > 0;
+
   return (
     <>
       <HeroSection settings={settings} />
@@ -52,31 +63,31 @@ export default async function HomePage() {
         <MassScheduleSection settings={settings} />
       </ScrollReveal>
 
-      <SectionDivider bg="ivory" />
+      {hasFeaturedAnnouncement && <SectionDivider bg="ivory" />}
 
       <ScrollReveal delay={80}>
         <FeaturedAnnouncementSection featuredAnnouncement={featuredAnnouncement} announcements={announcements} />
       </ScrollReveal>
 
-      <SectionDivider bg="white" />
+      {hasEvents && <SectionDivider bg="white" />}
 
       <ScrollReveal delay={80}>
         <UpcomingEventsSection events={events} />
       </ScrollReveal>
 
-      <SectionDivider bg="ivory-warm" />
+      {hasSacraments && <SectionDivider bg="ivory-warm" />}
 
       <ScrollReveal delay={80}>
         <SacramentsSection sacraments={sacraments} />
       </ScrollReveal>
 
-      <SectionDivider bg="ivory" />
+      {hasHomily && <SectionDivider bg="ivory" />}
 
       <ScrollReveal delay={80}>
         <LatestHomilySection homily={homily} />
       </ScrollReveal>
 
-      <SectionDivider bg="white" />
+      {hasMinistries && <SectionDivider bg="white" />}
 
       <ScrollReveal delay={80}>
         <MinistriesSection ministries={ministries} />
@@ -90,7 +101,7 @@ export default async function HomePage() {
         <GoogleReviewsSection place={placeDetails} />
       </ScrollReveal>
 
-      <SectionDivider bg="white" />
+      {hasFaqs && <SectionDivider bg="white" />}
 
       <ScrollReveal delay={80}>
         <FAQSection faqs={faqs} />

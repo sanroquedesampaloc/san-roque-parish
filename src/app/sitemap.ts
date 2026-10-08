@@ -26,6 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/prayer-request`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/give`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   const dynamicRoutes: MetadataRoute.Sitemap = [

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PARISH_SETTINGS_QUERY } from "@/sanity/lib/queries/parish";
 import { PageHero } from "@/components/ui/PageHero";
@@ -282,6 +283,18 @@ export default async function ContactPage() {
             subtitle="Fill out the form below and we will get back to you as soon as possible."
           />
           <ContactForm />
+
+          {/* Privacy guidance */}
+          <div className="max-w-2xl mx-auto mt-8 pt-6 border-t border-border-light">
+            <p className="text-xs text-charcoal-muted leading-relaxed">
+              We use the details you provide here only to respond to your
+              message. See our{" "}
+              <Link href="/privacy" className="underline hover:text-charcoal-light">
+                Privacy Notice
+              </Link>{" "}
+              for how we handle your information.
+            </p>
+          </div>
         </Container>
       </Section>
       </ScrollReveal>

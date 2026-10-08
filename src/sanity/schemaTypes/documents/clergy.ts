@@ -10,18 +10,21 @@ export const clergy = defineType({
     defineField({
       name: 'name',
       title: 'Name',
+      description: 'Full name as it should appear publicly, e.g. "Rev. Fr. Juan Dela Cruz".',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'position',
       title: 'Position / Title',
+      description: 'e.g., "Parish Priest", "Parochial Vicar", "Deacon".',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'photo',
       title: 'Photo',
+      description: 'A professional headshot works best. Optional — a neutral placeholder is shown automatically if left blank.',
       type: 'image',
       options: {hotspot: true},
       fields: [
@@ -31,11 +34,13 @@ export const clergy = defineType({
     defineField({
       name: 'biography',
       title: 'Biography',
+      description: 'A short, parish-approved biography. Leave blank until the parish has confirmed the exact wording — do not write or guess this on their behalf.',
       type: 'blockContent',
     }),
     defineField({
       name: 'order',
       title: 'Display Order',
+      description: 'Controls the order clergy are listed in (e.g. Parish Priest first). Lower numbers appear first.',
       type: 'number',
       validation: (rule) => rule.integer().positive(),
     }),

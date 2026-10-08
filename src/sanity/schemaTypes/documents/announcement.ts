@@ -10,12 +10,14 @@ export const announcement = defineType({
     defineField({
       name: 'title',
       title: 'Title',
+      description: 'The headline shown on the News page and at the top of the article.',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
+      description: 'Auto-generated from the title — this becomes part of the article\'s web address. Avoid changing it after the article is published and shared.',
       type: 'slug',
       options: {source: 'title', maxLength: 96},
       validation: (rule) => rule.required(),
@@ -23,6 +25,7 @@ export const announcement = defineType({
     defineField({
       name: 'excerpt',
       title: 'Excerpt',
+      description: 'A short 1–2 sentence summary shown on news cards. Optional but recommended.',
       type: 'text',
       rows: 3,
       validation: (rule) => rule.max(300),
@@ -30,20 +33,28 @@ export const announcement = defineType({
     defineField({
       name: 'featuredImage',
       title: 'Featured Image',
+      description: 'Shown on the News page and at the top of the article. Landscape photos work best.',
       type: 'image',
       options: {hotspot: true},
       fields: [
-        defineField({name: 'alt', type: 'string', title: 'Alt Text'}),
+        defineField({
+          name: 'alt',
+          type: 'string',
+          title: 'Alt Text',
+          description: 'Briefly describe the image for screen readers and search engines, e.g. "Parishioners gathered for Simbang Gabi."',
+        }),
       ],
     }),
     defineField({
       name: 'body',
       title: 'Body',
+      description: 'The full announcement text.',
       type: 'blockContent',
     }),
     defineField({
       name: 'category',
       title: 'Category',
+      description: 'Helps readers filter announcements by type on the News page.',
       type: 'string',
       options: {
         list: [
@@ -61,6 +72,7 @@ export const announcement = defineType({
     defineField({
       name: 'publishedAt',
       title: 'Published At',
+      description: 'Controls the date shown and the article\'s sort order. Defaults to now — adjust if backdating.',
       type: 'datetime',
       initialValue: () => new Date().toISOString(),
       validation: (rule) => rule.required(),
@@ -68,12 +80,14 @@ export const announcement = defineType({
     defineField({
       name: 'featured',
       title: 'Featured',
+      description: 'Featured announcements may be highlighted more prominently on the homepage.',
       type: 'boolean',
       initialValue: false,
     }),
     defineField({
       name: 'status',
       title: 'Status',
+      description: 'Archived announcements are removed from the public News page but kept here for record.',
       type: 'string',
       options: {
         list: [

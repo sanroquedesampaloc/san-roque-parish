@@ -10,12 +10,14 @@ export const ministry = defineType({
     defineField({
       name: 'name',
       title: 'Name',
+      description: 'The ministry or organization\'s name.',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
+      description: 'Auto-generated from the name — this becomes part of the ministry\'s web address.',
       type: 'slug',
       options: {source: 'name', maxLength: 96},
       validation: (rule) => rule.required(),
@@ -23,6 +25,7 @@ export const ministry = defineType({
     defineField({
       name: 'image',
       title: 'Image',
+      description: 'Shown alongside the ministry\'s description. Optional.',
       type: 'image',
       options: {hotspot: true},
       fields: [
@@ -32,11 +35,13 @@ export const ministry = defineType({
     defineField({
       name: 'description',
       title: 'Description',
+      description: 'What this ministry does and who can join.',
       type: 'blockContent',
     }),
     defineField({
       name: 'coordinator',
       title: 'Coordinator',
+      description: 'Name of the ministry\'s lead/coordinator. Optional — leave blank if not applicable.',
       type: 'string',
     }),
     defineField({
@@ -54,6 +59,7 @@ export const ministry = defineType({
     defineField({
       name: 'order',
       title: 'Display Order',
+      description: 'Controls the order ministries are listed in. Lower numbers appear first.',
       type: 'number',
       validation: (rule) => rule.integer().positive(),
     }),
