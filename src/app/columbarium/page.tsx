@@ -69,6 +69,14 @@ export default async function ColumbariumPage() {
           "A peaceful place of prayer and remembrance for our departed loved ones."
         }
         motif="cross"
+        image={
+          columbarium?.heroImage?.asset
+            ? {
+                src: urlFor(columbarium.heroImage).width(800).height(1000).url(),
+                alt: columbarium.heroImage.alt ?? "",
+              }
+            : undefined
+        }
       />
 
       {/* Introduction — CMS-only; hidden entirely rather than publishing an
@@ -146,26 +154,46 @@ export default async function ColumbariumPage() {
           <Section bg="default">
             <Container>
               <SectionHeading eyebrow="Remembrance" title="Niche &amp; Memorial Options" />
-              <div className="max-w-3xl mx-auto space-y-6">
-                {nicheOptions.map((option) => (
-                  <div
-                    key={option._key}
-                    className="bg-white border border-border p-6 md:p-8"
-                  >
-                    <div className={option.image?.asset ? "sm:flex sm:gap-6" : ""}>
-                      {option.image?.asset && (
-                        <div className="sm:w-40 flex-shrink-0 mb-4 sm:mb-0 border border-border-light overflow-hidden">
-                          <Image
-                            src={urlFor(option.image).width(320).height(320).url()}
-                            alt={option.image.alt ?? option.name ?? ""}
-                            width={320}
-                            height={320}
-                            sizes="160px"
-                            className="w-full h-auto"
-                          />
+              <div className="max-w-4xl mx-auto space-y-10">
+                {nicheOptions.map((option, i) => {
+                  const hasImage = Boolean(option.image?.asset);
+                  const metaRows = (
+                    <div className="space-y-1.5">
+                      {option.type && (
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark">
+                            Capacity
+                          </span>
+                          <span className="text-sm text-charcoal">{option.type}</span>
                         </div>
                       )}
-                      <div className="flex-1">
+                      {option.availabilityNote && (
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark">
+                            Availability
+                          </span>
+                          <span className="text-sm text-charcoal-light">
+                            {option.availabilityNote}
+                          </span>
+                        </div>
+                      )}
+                      {option.priceNote && (
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark">
+                            Price
+                          </span>
+                          <span className="text-sm text-charcoal-light">{option.priceNote}</span>
+                        </div>
+                      )}
+                    </div>
+                  );
+
+                  if (!hasImage) {
+                    return (
+                      <div
+                        key={option._key}
+                        className="bg-white border border-border p-6 md:p-8"
+                      >
                         <h3 className="text-lg font-semibold text-charcoal mb-1">
                           {option.name}
                         </h3>
@@ -174,34 +202,42 @@ export default async function ColumbariumPage() {
                             {option.description}
                           </p>
                         )}
-                        <div className="space-y-1.5">
-                          {option.type && (
-                            <div className="flex items-baseline gap-2">
-                              <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark">
-                                Capacity
-                              </span>
-                              <span className="text-sm text-charcoal">{option.type}</span>
-                            </div>
-                          )}
-                          {option.availabilityNote && (
-                            <div className="flex items-baseline gap-2">
-                              <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark">
-                                Availability
-                              </span>
-                              <span className="text-sm text-charcoal-light">
-                                {option.availabilityNote}
-                              </span>
-                            </div>
-                          )}
-                          {option.priceNote && (
-                            <div className="flex items-baseline gap-2">
-                              <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-gold-dark">
-                                Price
-                              </span>
-                              <span className="text-sm text-charcoal-light">{option.priceNote}</span>
-                            </div>
-                          )}
-                        </div>
+                        {metaRows}
+                        {option.notes && (
+                          <p className="mt-3 text-xs text-charcoal-muted italic leading-relaxed">
+                            {option.notes}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }
+
+                  const isReversed = i % 2 === 1;
+                  return (
+                    <div
+                      key={option._key}
+                      className={`md:flex md:gap-10 md:items-center ${isReversed ? "md:flex-row-reverse" : ""}`}
+                    >
+                      <div className="md:w-2/5 flex-shrink-0 mb-6 md:mb-0 border border-border overflow-hidden">
+                        <Image
+                          src={urlFor(option.image!).width(560).height(700).url()}
+                          alt={option.image!.alt ?? option.name ?? ""}
+                          width={560}
+                          height={700}
+                          sizes="(min-width: 768px) 320px, 100vw"
+                          className="w-full h-auto"
+                        />
+                      </div>
+                      <div className="md:flex-1">
+                        <h3 className="text-xl font-semibold text-charcoal mb-1">
+                          {option.name}
+                        </h3>
+                        {option.description && (
+                          <p className="text-sm text-charcoal-light leading-relaxed mb-3">
+                            {option.description}
+                          </p>
+                        )}
+                        {metaRows}
                         {option.notes && (
                           <p className="mt-3 text-xs text-charcoal-muted italic leading-relaxed">
                             {option.notes}
@@ -209,8 +245,8 @@ export default async function ColumbariumPage() {
                         )}
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </Container>
           </Section>
@@ -383,37 +419,68 @@ export default async function ColumbariumPage() {
           <Section bg="warm">
             <Container>
               <SectionHeading eyebrow="In Photographs" title="Gallery" />
-              <div
-                className={`max-w-5xl mx-auto grid gap-4 md:gap-6 ${
-                  gallery.length === 1
-                    ? "grid-cols-1 max-w-2xl"
-                    : gallery.length === 2
-                      ? "grid-cols-1 sm:grid-cols-2"
-                      : "grid-cols-2 md:grid-cols-3"
-                }`}
-              >
-                {gallery.map((photo) => (
-                  <div
-                    key={photo._key}
-                    className="border border-border overflow-hidden bg-white"
-                  >
+
+              {gallery.length === 1 && (
+                <div className="max-w-4xl mx-auto border border-border overflow-hidden bg-white">
+                  <div className="relative aspect-[3/2]">
                     <Image
-                      src={urlFor(photo).width(640).height(640).url()}
-                      alt={photo.alt ?? ""}
-                      width={640}
-                      height={640}
-                      sizes={
-                        gallery.length === 1
-                          ? "(min-width: 672px) 672px, 100vw"
-                          : gallery.length === 2
-                            ? "(min-width: 640px) 50vw, 100vw"
-                            : "(min-width: 768px) 33vw, 50vw"
-                      }
-                      className="w-full h-auto aspect-square object-cover"
+                      src={urlFor(gallery[0]).width(1600).height(1067).url()}
+                      alt={gallery[0].alt ?? ""}
+                      fill
+                      sizes="(min-width: 1024px) 896px, 100vw"
+                      className="object-cover"
                     />
                   </div>
-                ))}
-              </div>
+                </div>
+              )}
+
+              {gallery.length === 2 && (
+                <div className="max-w-5xl mx-auto grid grid-cols-5 gap-4 md:gap-6">
+                  <div className="col-span-3 relative aspect-[4/3] border border-border overflow-hidden bg-white">
+                    <Image
+                      src={urlFor(gallery[0]).width(960).height(720).url()}
+                      alt={gallery[0].alt ?? ""}
+                      fill
+                      sizes="(min-width: 768px) 55vw, 60vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="col-span-2 relative aspect-[3/4] border border-border overflow-hidden bg-white">
+                    <Image
+                      src={urlFor(gallery[1]).width(640).height(853).url()}
+                      alt={gallery[1].alt ?? ""}
+                      fill
+                      sizes="(min-width: 768px) 35vw, 40vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {gallery.length >= 3 && (
+                <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 auto-rows-[140px] sm:auto-rows-[170px] md:auto-rows-[200px] gap-4 md:gap-6">
+                  {gallery.slice(0, 6).map((photo, i) => (
+                    <div
+                      key={photo._key}
+                      className={`relative border border-border overflow-hidden bg-white ${
+                        i === 0 ? "col-span-2 row-span-2" : ""
+                      }`}
+                    >
+                      <Image
+                        src={urlFor(photo).width(800).height(800).url()}
+                        alt={photo.alt ?? ""}
+                        fill
+                        sizes={
+                          i === 0
+                            ? "(min-width: 768px) 46vw, 90vw"
+                            : "(min-width: 768px) 22vw, 45vw"
+                        }
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </Container>
           </Section>
         </ScrollReveal>

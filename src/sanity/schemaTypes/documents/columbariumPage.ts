@@ -41,6 +41,23 @@ export const columbariumPage = defineType({
       rows: 2,
       group: 'hero',
     }),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Image',
+      description:
+        'Use a high-quality photograph showing the Redeemed Columbarium interior or architectural space. A tall/portrait crop works best. If left blank, the hero uses the existing atmospheric treatment with no photograph.',
+      type: 'image',
+      options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          type: 'string',
+          title: 'Alt Text',
+          description: 'Briefly describe what the photograph shows.',
+        }),
+      ],
+      group: 'hero',
+    }),
 
     // Information
     defineField({
@@ -54,6 +71,7 @@ export const columbariumPage = defineType({
     defineField({
       name: 'introductionImage',
       title: 'Introduction Image',
+      description: 'Optional supporting interior photograph, shown alongside the Introduction.',
       type: 'image',
       options: {hotspot: true},
       fields: [
@@ -167,7 +185,8 @@ export const columbariumPage = defineType({
     defineField({
       name: 'gallery',
       title: 'Gallery',
-      description: 'Real photographs of the Columbarium only. Leave empty to hide this section.',
+      description:
+        'Upload real Redeemed Columbarium photographs. Recommended: 3–6 images. Leave empty to hide this section.',
       type: 'array',
       of: [
         defineArrayMember({

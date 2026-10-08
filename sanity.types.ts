@@ -246,6 +246,14 @@ export type ColumbariumPage = {
   eyebrow?: string;
   title?: string;
   heroSubtitle?: string;
+  heroImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
   introduction?: BlockContent;
   introductionImage?: {
     asset?: SanityImageAssetReference;
@@ -580,12 +588,13 @@ export type ANNOUNCEMENT_BY_SLUG_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries/columbarium.ts
 // Variable: COLUMBARIUM_PAGE_QUERY
-// Query: *[_id == "columbariumPage"][0]{    eyebrow,    title,    heroSubtitle,    introduction,    introductionImage,    locationDescription,    generalInformation,    availabilityNote,    nicheOptions,    pricingInfo,    reservationTerms,    inquirySteps,    inquiryNote,    visitingHours,    accessibilityNotes,    contactNumbers,    gallery,    faqs,    additionalNotes  }
+// Query: *[_id == "columbariumPage"][0]{    eyebrow,    title,    heroSubtitle,    heroImage,    introduction,    introductionImage,    locationDescription,    generalInformation,    availabilityNote,    nicheOptions,    pricingInfo,    reservationTerms,    inquirySteps,    inquiryNote,    visitingHours,    accessibilityNotes,    contactNumbers,    gallery,    faqs,    additionalNotes  }
 export type COLUMBARIUM_PAGE_QUERY_RESULT =
   | {
       eyebrow: null;
       title: null;
       heroSubtitle: null;
+      heroImage: null;
       introduction: null;
       introductionImage: null;
       locationDescription: null;
@@ -607,6 +616,7 @@ export type COLUMBARIUM_PAGE_QUERY_RESULT =
       eyebrow: null;
       title: string;
       heroSubtitle: null;
+      heroImage: null;
       introduction: null;
       introductionImage: null;
       locationDescription: null;
@@ -628,6 +638,7 @@ export type COLUMBARIUM_PAGE_QUERY_RESULT =
       eyebrow: null;
       title: string | null;
       heroSubtitle: null;
+      heroImage: null;
       introduction: null;
       introductionImage: null;
       locationDescription: null;
@@ -649,6 +660,7 @@ export type COLUMBARIUM_PAGE_QUERY_RESULT =
       eyebrow: null;
       title: null;
       heroSubtitle: null;
+      heroImage: null;
       introduction: BlockContent | null;
       introductionImage: null;
       locationDescription: null;
@@ -670,6 +682,14 @@ export type COLUMBARIUM_PAGE_QUERY_RESULT =
       eyebrow: string | null;
       title: string | null;
       heroSubtitle: string | null;
+      heroImage: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
       introduction: BlockContent | null;
       introductionImage: {
         asset?: SanityImageAssetReference;
@@ -721,6 +741,112 @@ export type COLUMBARIUM_PAGE_QUERY_RESULT =
         } & ColumbariumFaq
       > | null;
       additionalNotes: string | null;
+    }
+  | null;
+
+// Source: src/sanity/lib/queries/columbarium.ts
+// Variable: COLUMBARIUM_TEASER_QUERY
+// Query: *[_id == "columbariumPage"][0]{    eyebrow,    title,    heroImage,    "introduction": introduction[0...1],    locationDescription  }
+export type COLUMBARIUM_TEASER_QUERY_RESULT =
+  | {
+      eyebrow: null;
+      title: null;
+      heroImage: null;
+      introduction: null;
+      locationDescription: null;
+    }
+  | {
+      eyebrow: null;
+      title: string;
+      heroImage: null;
+      introduction: null;
+      locationDescription: null;
+    }
+  | {
+      eyebrow: null;
+      title: string | null;
+      heroImage: null;
+      introduction: null;
+      locationDescription: null;
+    }
+  | {
+      eyebrow: null;
+      title: null;
+      heroImage: null;
+      introduction: Array<
+        | {
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<{
+              href?: string;
+              _type: "link";
+              _key: string;
+            }>;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }
+        | {
+            asset?: SanityImageAssetReference;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            caption?: string;
+            _type: "image";
+            _key: string;
+          }
+      > | null;
+      locationDescription: null;
+    }
+  | {
+      eyebrow: string | null;
+      title: string | null;
+      heroImage: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        _type: "image";
+      } | null;
+      introduction: Array<
+        | {
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: "span";
+              _key: string;
+            }>;
+            style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+            listItem?: "bullet" | "number";
+            markDefs?: Array<{
+              href?: string;
+              _type: "link";
+              _key: string;
+            }>;
+            level?: number;
+            _type: "block";
+            _key: string;
+          }
+        | {
+            asset?: SanityImageAssetReference;
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            caption?: string;
+            _type: "image";
+            _key: string;
+          }
+      > | null;
+      locationDescription: string | null;
     }
   | null;
 
@@ -1010,7 +1136,8 @@ declare module "@sanity/client" {
     '\n  *[_type == "announcement" && featured == true && status == "active"]\n    | order(publishedAt desc) [0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    category,\n    publishedAt\n  }\n': FEATURED_ANNOUNCEMENT_QUERY_RESULT;
     '\n  *[_type == "announcement" && status == "active"]\n    | order(publishedAt desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    category,\n    publishedAt,\n    featured\n  }\n': ANNOUNCEMENTS_LIST_QUERY_RESULT;
     '\n  *[_type == "announcement" && slug.current == $slug && status == "active"][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    excerpt,\n    featuredImage,\n    body,\n    category,\n    publishedAt,\n    featured,\n    status\n  }\n': ANNOUNCEMENT_BY_SLUG_QUERY_RESULT;
-    '\n  *[_id == "columbariumPage"][0]{\n    eyebrow,\n    title,\n    heroSubtitle,\n    introduction,\n    introductionImage,\n    locationDescription,\n    generalInformation,\n    availabilityNote,\n    nicheOptions,\n    pricingInfo,\n    reservationTerms,\n    inquirySteps,\n    inquiryNote,\n    visitingHours,\n    accessibilityNotes,\n    contactNumbers,\n    gallery,\n    faqs,\n    additionalNotes\n  }\n': COLUMBARIUM_PAGE_QUERY_RESULT;
+    '\n  *[_id == "columbariumPage"][0]{\n    eyebrow,\n    title,\n    heroSubtitle,\n    heroImage,\n    introduction,\n    introductionImage,\n    locationDescription,\n    generalInformation,\n    availabilityNote,\n    nicheOptions,\n    pricingInfo,\n    reservationTerms,\n    inquirySteps,\n    inquiryNote,\n    visitingHours,\n    accessibilityNotes,\n    contactNumbers,\n    gallery,\n    faqs,\n    additionalNotes\n  }\n': COLUMBARIUM_PAGE_QUERY_RESULT;
+    '\n  *[_id == "columbariumPage"][0]{\n    eyebrow,\n    title,\n    heroImage,\n    "introduction": introduction[0...1],\n    locationDescription\n  }\n': COLUMBARIUM_TEASER_QUERY_RESULT;
     '\n  *[_type == "event" && status in ["upcoming", "ongoing"]]\n    | order(startDate asc) {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    featured,\n    status\n  }\n': UPCOMING_EVENTS_QUERY_RESULT;
     '\n  *[_type == "event" && status != "cancelled"] | order(startDate desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    featured,\n    status\n  }\n': EVENTS_LIST_QUERY_RESULT;
     '\n  *[_type == "event" && slug.current == $slug && status != "cancelled"][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    poster,\n    description,\n    startDate,\n    endDate,\n    startTime,\n    endTime,\n    location,\n    registrationUrl,\n    featured,\n    status\n  }\n': EVENT_BY_SLUG_QUERY_RESULT;

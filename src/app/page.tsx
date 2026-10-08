@@ -5,6 +5,7 @@ import { FEATURED_ANNOUNCEMENT_QUERY, ANNOUNCEMENTS_LIST_QUERY } from "@/sanity/
 import { UPCOMING_EVENTS_QUERY } from "@/sanity/lib/queries/events";
 import { LATEST_HOMILY_QUERY } from "@/sanity/lib/queries/homilies";
 import { FAQS_LIST_QUERY } from "@/sanity/lib/queries/faqs";
+import { COLUMBARIUM_TEASER_QUERY } from "@/sanity/lib/queries/columbarium";
 import { getPlaceDetails } from "@/lib/google-places";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionDivider } from "@/components/ui/SectionDivider";
@@ -14,6 +15,7 @@ import { FeaturedAnnouncementSection } from "@/components/home/FeaturedAnnouncem
 import { UpcomingEventsSection } from "@/components/home/UpcomingEventsSection";
 import { SacramentsSection } from "@/components/home/SacramentsSection";
 import { LatestHomilySection } from "@/components/home/LatestHomilySection";
+import { ColumbariumSection } from "@/components/home/ColumbariumSection";
 import { MinistriesSection } from "@/components/home/MinistriesSection";
 import { PrayerRequestSection } from "@/components/home/PrayerRequestSection";
 import { GoogleReviewsSection } from "@/components/home/GoogleReviewsSection";
@@ -31,6 +33,7 @@ export default async function HomePage() {
     { data: homily },
     { data: ministries },
     { data: faqs },
+    { data: columbarium },
     placeDetails,
   ] = await Promise.all([
     sanityFetch({ query: PARISH_SETTINGS_QUERY }),
@@ -41,6 +44,7 @@ export default async function HomePage() {
     sanityFetch({ query: LATEST_HOMILY_QUERY }),
     sanityFetch({ query: MINISTRIES_LIST_QUERY }),
     sanityFetch({ query: FAQS_LIST_QUERY }),
+    sanityFetch({ query: COLUMBARIUM_TEASER_QUERY }),
     getPlaceDetails(),
   ]);
 
@@ -52,6 +56,7 @@ export default async function HomePage() {
   const hasEvents = events.length > 0;
   const hasSacraments = sacraments.length > 0;
   const hasHomily = Boolean(homily);
+  const hasColumbarium = Boolean(columbarium?.title);
   const hasMinistries = ministries.length > 0;
   const hasFaqs = faqs.length > 0;
 
@@ -85,6 +90,12 @@ export default async function HomePage() {
 
       <ScrollReveal delay={80}>
         <LatestHomilySection homily={homily} />
+      </ScrollReveal>
+
+      {hasColumbarium && <SectionDivider bg="ivory-warm" />}
+
+      <ScrollReveal delay={80}>
+        <ColumbariumSection columbarium={columbarium} />
       </ScrollReveal>
 
       {hasMinistries && <SectionDivider bg="white" />}

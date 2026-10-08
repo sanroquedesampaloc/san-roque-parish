@@ -22,6 +22,7 @@ export const columbariumNicheOption = defineType({
     defineField({
       name: 'image',
       title: 'Image',
+      description: 'Upload the corresponding Small or Large Family Niche photograph.',
       type: 'image',
       options: {hotspot: true},
       fields: [
