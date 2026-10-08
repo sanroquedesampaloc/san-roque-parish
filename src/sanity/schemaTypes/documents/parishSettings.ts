@@ -10,6 +10,7 @@ export const parishSettings = defineType({
     {name: 'general', title: 'General', default: true},
     {name: 'contact', title: 'Contact'},
     {name: 'schedules', title: 'Schedules'},
+    {name: 'livestream', title: 'Live Stream'},
     {name: 'social', title: 'Social & Links'},
     {name: 'other', title: 'Other'},
   ],
@@ -99,6 +100,16 @@ export const parishSettings = defineType({
       type: 'array',
       of: [defineArrayMember({type: 'scheduleEntry'})],
       group: 'schedules',
+    }),
+
+    // Live Stream
+    defineField({
+      name: 'liveStream',
+      title: 'Live Stream',
+      description:
+        'Workflow: start the Facebook Live broadcast, paste its public URL below, enable, and publish. When Mass ends, disable and publish — the website switches back to the offline message automatically.',
+      type: 'liveStream',
+      group: 'livestream',
     }),
 
     // Social & Links

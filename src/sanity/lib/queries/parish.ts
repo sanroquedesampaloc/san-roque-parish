@@ -12,6 +12,7 @@ export const PARISH_SETTINGS_QUERY = defineQuery(`
     weekdayMassSchedule,
     saturdayMassSchedule,
     confessionSchedule,
+    liveStream,
     facebookUrl,
     youtubeUrl,
     messengerUrl,
@@ -19,6 +20,16 @@ export const PARISH_SETTINGS_QUERY = defineQuery(`
     googleMapsEmbedUrl,
     givingInfo,
     footerInfo
+  }
+`)
+
+// Deliberately minimal — fetched on its own short-revalidate path (see
+// src/lib/liveStreamFetch.ts) so the Live Mass feature stays fresh without
+// making the rest of the homepage/parishSettings data dynamic too.
+export const LIVE_STREAM_QUERY = defineQuery(`
+  *[_id == "parishSettings"][0]{
+    liveStream,
+    facebookUrl
   }
 `)
 

@@ -37,6 +37,15 @@ test.describe("Footer navigation", () => {
     await link.click();
     await expect(page).toHaveURL(/\/columbarium/);
   });
+
+  test("footer links to the Live Mass page", async ({ page }) => {
+    await page.goto("/");
+    const footer = page.locator("footer");
+    const link = footer.getByRole("link", { name: /live mass/i });
+    await expect(link).toBeVisible();
+    await link.click();
+    await expect(page).toHaveURL(/\/live/);
+  });
 });
 
 test.describe("Homepage CTAs", () => {
@@ -85,6 +94,15 @@ test.describe("Mobile navigation", () => {
     await expect(page).toHaveURL(/\/columbarium/);
   });
 
+  test("mobile menu links to the Live Mass page", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /open menu/i }).click();
+
+    const dialog = page.getByRole("dialog", { name: /mobile/i });
+    await dialog.getByRole("link", { name: /live mass/i }).click();
+    await expect(page).toHaveURL(/\/live/);
+  });
+
   test("escape key closes mobile menu", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("button", { name: /open menu/i }).click();
@@ -108,6 +126,7 @@ test.describe("Mobile navigation", () => {
     const expectedLinks = [
       "Donate",
       "Home",
+      "Live Mass",
       "About",
       "Sacraments",
       "Columbarium",

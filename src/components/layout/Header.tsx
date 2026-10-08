@@ -12,12 +12,15 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-// The mobile drawer has room for one more item than the desktop bar, which
-// is already near its practical width limit at the 1024px breakpoint where
-// it first appears (see docs/DECISIONS.md). Columbarium is reachable here
-// and from the footer's Quick Links instead of forcing a 9th desktop item.
+// The mobile drawer has room for more items than the desktop bar, which is
+// already near its practical width limit at the 1024px breakpoint where it
+// first appears (see docs/DECISIONS.md). Live Mass and Columbarium are
+// reachable here and from the footer's Quick Links instead of forcing more
+// items into the desktop bar.
 const mobileNavLinks = [
-  ...navLinks.slice(0, 3),
+  ...navLinks.slice(0, 1),
+  { href: "/live", label: "Live Mass" },
+  ...navLinks.slice(1, 3),
   { href: "/columbarium", label: "Columbarium" },
   ...navLinks.slice(3),
 ];

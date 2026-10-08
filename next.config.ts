@@ -6,7 +6,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "img-src 'self' https://cdn.sanity.io data: blob:",
   "font-src 'self' https://fonts.gstatic.com",
-  "frame-src https://www.youtube-nocookie.com https://player.vimeo.com https://www.google.com/maps/",
+  "frame-src https://www.youtube-nocookie.com https://player.vimeo.com https://www.google.com/maps/ https://www.facebook.com",
   "connect-src 'self' https://*.sanity.io https://challenges.cloudflare.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",

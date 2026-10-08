@@ -665,6 +665,14 @@
         },
         "optional": true
       },
+      "liveStream": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "liveStream"
+        },
+        "optional": true
+      },
       "facebookUrl": {
         "type": "objectAttribute",
         "value": {
@@ -715,6 +723,50 @@
           "name": "blockContent"
         },
         "optional": true
+      }
+    }
+  },
+  {
+    "name": "liveStream",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "liveStream"
+          }
+        },
+        "isActive": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "facebookUrl": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "description": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
       }
     }
   },

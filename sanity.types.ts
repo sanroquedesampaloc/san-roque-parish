@@ -128,6 +128,7 @@ export type ParishSettings = {
       _key: string;
     } & ScheduleEntry
   >;
+  liveStream?: LiveStream;
   facebookUrl?: string;
   youtubeUrl?: string;
   messengerUrl?: string;
@@ -135,6 +136,14 @@ export type ParishSettings = {
   googleMapsEmbedUrl?: string;
   givingInfo?: BlockContent;
   footerInfo?: BlockContent;
+};
+
+export type LiveStream = {
+  _type: "liveStream";
+  isActive?: boolean;
+  title?: string;
+  facebookUrl?: string;
+  description?: string;
 };
 
 export type Ministry = {
@@ -499,6 +508,7 @@ export type AllSanitySchemaTypes =
   | BlockContent
   | Slug
   | ParishSettings
+  | LiveStream
   | Ministry
   | SanityImageCrop
   | SanityImageHotspot
@@ -1001,7 +1011,7 @@ export type HOMILY_BY_SLUG_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries/parish.ts
 // Variable: PARISH_SETTINGS_QUERY
-// Query: *[_id == "parishSettings"][0]{    parishName,    shortDescription,    address,    phone,    email,    officeHours,    sundayMassSchedule,    weekdayMassSchedule,    saturdayMassSchedule,    confessionSchedule,    facebookUrl,    youtubeUrl,    messengerUrl,    googleMapsUrl,    googleMapsEmbedUrl,    givingInfo,    footerInfo  }
+// Query: *[_id == "parishSettings"][0]{    parishName,    shortDescription,    address,    phone,    email,    officeHours,    sundayMassSchedule,    weekdayMassSchedule,    saturdayMassSchedule,    confessionSchedule,    liveStream,    facebookUrl,    youtubeUrl,    messengerUrl,    googleMapsUrl,    googleMapsEmbedUrl,    givingInfo,    footerInfo  }
 export type PARISH_SETTINGS_QUERY_RESULT =
   | {
       parishName: null;
@@ -1014,6 +1024,7 @@ export type PARISH_SETTINGS_QUERY_RESULT =
       weekdayMassSchedule: null;
       saturdayMassSchedule: null;
       confessionSchedule: null;
+      liveStream: null;
       facebookUrl: null;
       youtubeUrl: null;
       messengerUrl: null;
@@ -1053,6 +1064,7 @@ export type PARISH_SETTINGS_QUERY_RESULT =
           _key: string;
         } & ScheduleEntry
       > | null;
+      liveStream: LiveStream | null;
       facebookUrl: string | null;
       youtubeUrl: string | null;
       messengerUrl: string | null;
@@ -1060,6 +1072,20 @@ export type PARISH_SETTINGS_QUERY_RESULT =
       googleMapsEmbedUrl: string | null;
       givingInfo: BlockContent | null;
       footerInfo: BlockContent | null;
+    }
+  | null;
+
+// Source: src/sanity/lib/queries/parish.ts
+// Variable: LIVE_STREAM_QUERY
+// Query: *[_id == "parishSettings"][0]{    liveStream,    facebookUrl  }
+export type LIVE_STREAM_QUERY_RESULT =
+  | {
+      liveStream: null;
+      facebookUrl: null;
+    }
+  | {
+      liveStream: LiveStream | null;
+      facebookUrl: string | null;
     }
   | null;
 
@@ -1145,7 +1171,8 @@ declare module "@sanity/client" {
     '\n  *[_type == "homily"] | order(date desc) [0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': LATEST_HOMILY_QUERY_RESULT;
     '\n  *[_type == "homily"] | order(date desc) {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    thumbnail,\n    description,\n    liturgicalOccasion,\n    videoUrl\n  }\n': HOMILIES_LIST_QUERY_RESULT;
     '\n  *[_type == "homily" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    date,\n    celebrant,\n    videoUrl,\n    thumbnail,\n    description,\n    liturgicalOccasion\n  }\n': HOMILY_BY_SLUG_QUERY_RESULT;
-    '\n  *[_id == "parishSettings"][0]{\n    parishName,\n    shortDescription,\n    address,\n    phone,\n    email,\n    officeHours,\n    sundayMassSchedule,\n    weekdayMassSchedule,\n    saturdayMassSchedule,\n    confessionSchedule,\n    facebookUrl,\n    youtubeUrl,\n    messengerUrl,\n    googleMapsUrl,\n    googleMapsEmbedUrl,\n    givingInfo,\n    footerInfo\n  }\n': PARISH_SETTINGS_QUERY_RESULT;
+    '\n  *[_id == "parishSettings"][0]{\n    parishName,\n    shortDescription,\n    address,\n    phone,\n    email,\n    officeHours,\n    sundayMassSchedule,\n    weekdayMassSchedule,\n    saturdayMassSchedule,\n    confessionSchedule,\n    liveStream,\n    facebookUrl,\n    youtubeUrl,\n    messengerUrl,\n    googleMapsUrl,\n    googleMapsEmbedUrl,\n    givingInfo,\n    footerInfo\n  }\n': PARISH_SETTINGS_QUERY_RESULT;
+    '\n  *[_id == "parishSettings"][0]{\n    liveStream,\n    facebookUrl\n  }\n': LIVE_STREAM_QUERY_RESULT;
     '\n  *[_type == "clergy"] | order(order asc) {\n    _id,\n    name,\n    position,\n    photo,\n    biography,\n    order\n  }\n': CLERGY_LIST_QUERY_RESULT;
     '\n  *[_type == "ministry"] | order(order asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    image,\n    description,\n    coordinator,\n    contactInfo,\n    meetingSchedule,\n    order\n  }\n': MINISTRIES_LIST_QUERY_RESULT;
     '\n  *[_type == "sacrament"] | order(order asc) {\n    _id,\n    name,\n    "slug": slug.current,\n    introduction,\n    requirements,\n    schedule,\n    contactGuidance,\n    documents,\n    order\n  }\n': SACRAMENTS_LIST_QUERY_RESULT;

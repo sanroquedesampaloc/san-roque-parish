@@ -29,6 +29,7 @@ test.describe("CSP runtime verification", () => {
     { path: "/contact", label: "contact (turnstile)" },
     { path: "/prayer-request", label: "prayer request (turnstile)" },
     { path: "/about", label: "about (sanity images)" },
+    { path: "/live", label: "live (facebook embed)" },
   ];
 
   for (const { path, label } of pagesToCheck) {

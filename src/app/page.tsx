@@ -7,10 +7,12 @@ import { LATEST_HOMILY_QUERY } from "@/sanity/lib/queries/homilies";
 import { FAQS_LIST_QUERY } from "@/sanity/lib/queries/faqs";
 import { COLUMBARIUM_TEASER_QUERY } from "@/sanity/lib/queries/columbarium";
 import { getPlaceDetails } from "@/lib/google-places";
+import { fetchLiveStreamData } from "@/lib/liveStreamFetch";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionDivider } from "@/components/ui/SectionDivider";
 import { HeroSection } from "@/components/home/HeroSection";
 import { MassScheduleSection } from "@/components/home/MassScheduleSection";
+import { LiveMassSection } from "@/components/home/LiveMassSection";
 import { FeaturedAnnouncementSection } from "@/components/home/FeaturedAnnouncementSection";
 import { UpcomingEventsSection } from "@/components/home/UpcomingEventsSection";
 import { SacramentsSection } from "@/components/home/SacramentsSection";
@@ -22,6 +24,11 @@ import { GoogleReviewsSection } from "@/components/home/GoogleReviewsSection";
 import { FAQSection } from "@/components/home/FAQSection";
 import { SupportParishSection } from "@/components/home/SupportParishSection";
 import { VisitContactSection } from "@/components/home/VisitContactSection";
+
+// Only needed because of the Live Mass section's 30s-revalidate fetch
+// (see src/lib/liveStreamFetch.ts) — every other section on this page
+// still relies on Sanity's on-demand Live Content API revalidation.
+export const revalidate = 30;
 
 export default async function HomePage() {
   const [
@@ -35,6 +42,7 @@ export default async function HomePage() {
     { data: faqs },
     { data: columbarium },
     placeDetails,
+    liveStreamData,
   ] = await Promise.all([
     sanityFetch({ query: PARISH_SETTINGS_QUERY }),
     sanityFetch({ query: FEATURED_ANNOUNCEMENT_QUERY }),
@@ -46,6 +54,7 @@ export default async function HomePage() {
     sanityFetch({ query: FAQS_LIST_QUERY }),
     sanityFetch({ query: COLUMBARIUM_TEASER_QUERY }),
     getPlaceDetails(),
+    fetchLiveStreamData(),
   ]);
 
   // Each divider below sits between two sections; several of those sections
@@ -66,6 +75,15 @@ export default async function HomePage() {
 
       <ScrollReveal>
         <MassScheduleSection settings={settings} />
+      </ScrollReveal>
+
+      <SectionDivider bg="white" />
+
+      <ScrollReveal delay={80}>
+        <LiveMassSection
+          liveStream={liveStreamData?.liveStream}
+          facebookPageUrl={liveStreamData?.facebookUrl}
+        />
       </ScrollReveal>
 
       {hasFeaturedAnnouncement && <SectionDivider bg="ivory" />}

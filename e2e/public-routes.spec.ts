@@ -4,6 +4,7 @@ const publicRoutes = [
   { path: "/", title: "San Roque de Sampaloc Parish" },
   { path: "/about", title: "About" },
   { path: "/mass-sacraments", title: "Mass" },
+  { path: "/live", title: "Live Mass" },
   { path: "/columbarium", title: "Columbarium" },
   { path: "/news", title: "News" },
   { path: "/events", title: "Events" },
