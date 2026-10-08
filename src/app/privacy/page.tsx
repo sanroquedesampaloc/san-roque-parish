@@ -67,12 +67,89 @@ export default async function PrivacyPage() {
                 How it&rsquo;s delivered and kept
               </h2>
               <p>
-                Form submissions are sent by email to the parish office and
-                are not stored in a public database on this website. We keep
+                Form submissions are sent as an email to the parish office
+                using Resend, a transactional email delivery service — they
+                are not stored in a database on this website. We keep
                 messages only as long as needed to respond to you or to
                 continue praying for your intention, and we do not sell or
                 share your information with third parties for marketing
                 purposes.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-semibold text-charcoal mb-3">
+                Keeping our forms free of spam
+              </h2>
+              <p>
+                Our Contact and Prayer Request forms use Cloudflare Turnstile,
+                a privacy-friendly anti-spam check, to help confirm that a
+                submission is coming from a real visitor rather than an
+                automated script. It runs only on those two pages.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-semibold text-charcoal mb-3">
+                The technology behind this website
+              </h2>
+              <p>
+                The parish news, events, homilies, and other content you see
+                on this site are managed through Sanity, a content management
+                platform, which also hosts the images used throughout the
+                site. This is infrastructure for running the website — it
+                does not involve any personal information you submit through
+                our forms.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-semibold text-charcoal mb-3">
+                Optional external content
+              </h2>
+              <p className="mb-3">
+                Some pages can show embedded content from outside services —
+                a Google Map on our Contact page and homepage, and a Facebook
+                video player when Mass is being streamed live. These are
+                optional: we don&rsquo;t load them until you choose to, either
+                by allowing &ldquo;External Media&rdquo; in the cookie banner
+                or preferences panel, or by clicking directly on an individual
+                map or video to load it.
+              </p>
+              <p>
+                If you choose to load one of these embeds, your browser
+                connects directly to Google or Facebook, and that company may
+                process data about your visit according to its own privacy
+                practices, which are outside our control. You can always use
+                the plain &ldquo;Get Directions&rdquo; or &ldquo;Watch on
+                Facebook&rdquo; links instead, which open the map or the
+                parish Facebook page directly without loading anything on
+                this site.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-semibold text-charcoal mb-3">
+                Remembering your cookie preference
+              </h2>
+              <p>
+                If you make a choice about external media, we save that
+                choice in a single first-party cookie on your device
+                (&ldquo;parish_consent&rdquo;) so we don&rsquo;t ask again on
+                every visit. It stores only your preference and the date it
+                was set — nothing that identifies you. You can change your
+                choice at any time using the &ldquo;Cookie Preferences&rdquo;
+                link in the footer of any page.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-lg font-semibold text-charcoal mb-3">
+                No analytics or advertising
+              </h2>
+              <p>
+                We do not use Google Analytics, Meta/Facebook Pixel, or any
+                similar analytics or advertising technology on this website.
               </p>
             </div>
 

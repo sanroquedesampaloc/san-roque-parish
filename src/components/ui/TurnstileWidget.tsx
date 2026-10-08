@@ -57,6 +57,11 @@ export const TurnstileWidget = forwardRef<TurnstileHandle>(
     }, []);
 
     useEffect(() => {
+      // Skip injecting Cloudflare's script entirely when no site key is
+      // configured — renderWidget() would be a no-op anyway, so there's no
+      // reason to make the request.
+      if (!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY) return;
+
       if (scriptLoadedRef.current) {
         renderWidget();
         return;

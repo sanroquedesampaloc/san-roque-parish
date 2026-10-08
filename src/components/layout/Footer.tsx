@@ -2,6 +2,7 @@ import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PARISH_SETTINGS_QUERY } from "@/sanity/lib/queries/parish";
 import { PortableTextRenderer } from "@/components/ui/PortableTextRenderer";
+import { CookiePreferencesButton } from "@/components/consent/CookiePreferencesButton";
 
 const quickLinks = [
   { href: "/mass-sacraments", label: "Mass & Sacraments" },
@@ -136,6 +137,7 @@ export async function Footer() {
             <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy
             </Link>
+            <CookiePreferencesButton />
           </p>
         </div>
       </div>

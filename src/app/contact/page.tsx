@@ -11,6 +11,7 @@ import { ContactForm } from "@/components/ui/ContactForm";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionDivider } from "@/components/ui/SectionDivider";
+import { ExternalMediaGate } from "@/components/consent/ExternalMediaGate";
 import { isGoogleMapsEmbedUrl } from "@/lib/googleMaps";
 
 export const metadata: Metadata = {
@@ -120,18 +121,30 @@ export default async function ContactPage({
 
               {/* Map / directions column */}
               {settings?.googleMapsEmbedUrl && isGoogleMapsEmbedUrl(settings.googleMapsEmbedUrl) ? (
-                <div className="min-h-[280px] md:min-h-0 border-t md:border-t-0 md:border-l border-border">
-                  <iframe
-                    src={settings.googleMapsEmbedUrl}
-                    title="San Roque de Sampaloc Parish location on Google Maps"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0, minHeight: 280 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="w-full h-full"
-                  />
+                <div className="border-t md:border-t-0 md:border-l border-border md:h-full">
+                  <ExternalMediaGate
+                    title="Google Map"
+                    description="Loading this map connects your browser to Google."
+                    primaryLabel="Load Map"
+                    secondaryLabel={settings.googleMapsUrl ? "Get Directions" : undefined}
+                    secondaryHref={settings.googleMapsUrl ?? undefined}
+                    variant="box"
+                    className="md:h-full"
+                  >
+                    <div className="min-h-[280px] md:min-h-0 h-full">
+                      <iframe
+                        src={settings.googleMapsEmbedUrl}
+                        title="San Roque de Sampaloc Parish location on Google Maps"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0, minHeight: 280 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="w-full h-full"
+                      />
+                    </div>
+                  </ExternalMediaGate>
                 </div>
               ) : (
                 <div className="bg-parchment flex flex-col items-center justify-center p-8 md:p-10 min-h-[280px] md:min-h-0 border-t md:border-t-0 md:border-l border-border">

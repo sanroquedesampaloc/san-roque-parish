@@ -5,6 +5,9 @@ import { PARISH_SETTINGS_QUERY } from "@/sanity/lib/queries/parish";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ChurchStructuredData } from "@/components/seo/ChurchStructuredData";
+import { ConsentProvider } from "@/components/consent/ConsentProvider";
+import { ConsentBanner } from "@/components/consent/ConsentBanner";
+import { ConsentPreferences } from "@/components/consent/ConsentPreferences";
 import { SITE_URL } from "@/lib/constants";
 import "./globals.css";
 
@@ -47,17 +50,21 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       className={`${ebGaramond.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ChurchStructuredData settings={settings} />
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-burgundy focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:text-sm focus:font-semibold focus:outline-2 focus:outline-offset-2 focus:outline-burgundy"
-        >
-          Skip to main content
-        </a>
-        <Header />
-        <main id="main-content" className="flex-1">{children}</main>
-        <Footer />
-        <SanityLive />
+        <ConsentProvider>
+          <ChurchStructuredData settings={settings} />
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-burgundy focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:text-sm focus:font-semibold focus:outline-2 focus:outline-offset-2 focus:outline-burgundy"
+          >
+            Skip to main content
+          </a>
+          <Header />
+          <main id="main-content" className="flex-1">{children}</main>
+          <Footer />
+          <SanityLive />
+          <ConsentBanner />
+          <ConsentPreferences />
+        </ConsentProvider>
       </body>
     </html>
   );

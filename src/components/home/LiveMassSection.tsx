@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { FacebookLiveEmbed } from "@/components/ui/FacebookLiveEmbed";
+import { ExternalMediaGate } from "@/components/consent/ExternalMediaGate";
 import { getFacebookEmbedUrl } from "@/lib/facebookEmbed";
 import type { PARISH_SETTINGS_QUERY_RESULT } from "../../../sanity.types";
 
@@ -35,10 +36,19 @@ export function LiveMassSection({
           </div>
 
           <div className="max-w-3xl mx-auto border border-border">
-            <FacebookLiveEmbed
-              url={liveStream!.facebookUrl}
-              title={liveStream!.title || "Live Mass from San Roque de Sampaloc Parish"}
-            />
+            <ExternalMediaGate
+              title="Live Mass"
+              description="Loading the live video connects your browser to Facebook."
+              primaryLabel="Watch Here"
+              secondaryLabel="Watch on Facebook"
+              secondaryHref={liveStream!.facebookUrl!}
+              variant="video"
+            >
+              <FacebookLiveEmbed
+                url={liveStream!.facebookUrl}
+                title={liveStream!.title || "Live Mass from San Roque de Sampaloc Parish"}
+              />
+            </ExternalMediaGate>
           </div>
 
           <div className="mt-8 text-center">
